@@ -1,0 +1,29 @@
+{
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module"
+  },
+  "extends": "eslint:recommended",
+  "rules": {
+    "complexity": 2,
+    "guard-for-in": 2,
+    "no-alert": 2,
+    "no-empty-function": 1,
+    "no-eval": 2,
+    "no-extra-bind": 2,
+    "no-floating-decimal": 1,
+    "no-extra-label": 1,
+    "no-extra-parens": 1,
+    "no-invalid-this": 2,
+    "no-magic-numbers": 1,
+    "no-new": 2,
+    "no-return-assign": 2,
+    "no-self-compare": 2,
+    "quotes": 2,
+    "space-before-blocks": 2
+  }
+}
