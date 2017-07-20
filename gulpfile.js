@@ -6,28 +6,37 @@ var gulp = require('gulp'),
   eslint = require('gulp-eslint'),
 	sass = require('gulp-sass'),
 	sourcemaps = require('gulp-sourcemaps'),
-	concat = require('gulp-concat'),
 	uglify = require('gulp-uglify'),
-	del = require('del');
+	del = require('del'),
+  env = 'DEV';
 
-// define the default task and add the watch task to it
+// default build doesn't uglify JS
 gulp.task('default', function () {
-	runSequence(
-		'eslint',
-		'clean',
-		'build-css',
-		'build-js',
-		'copyHtml',
-		'copyResources'
-	);
+  runBuild();
 });
+
+gulp.task('prod', function () {
+  env = 'PROD';
+  runBuild();
+});
+
+function runBuild() {
+  runSequence(
+    'eslint',
+    'clean',
+    'build-css',
+    'build-js',
+    'copyHtml',
+    'copyResources'
+  );
+}
 
 gulp.task('clean', function () {
 	return del('target/**/*');
 });
 
 gulp.task('eslint', function() {
-	return gulp.src(['src/**/*.js','!node_modules/**'])
+	return gulp.src(['src/**/*.js','!node_modules/**','!src/js/jquery-3.2.1.min.js'])
 			.pipe(eslint())
 			// eslint.format() outputs the lint results to the console.
 			// Alternatively use eslint.formatEach() (see Docs).
@@ -44,13 +53,16 @@ gulp.task('build-css', function() {
 });
 
 gulp.task('build-js', function() {
-  return gulp.src('src/js/**/*.js')
-    .pipe(sourcemaps.init())
-    .pipe(concat('bundle.js'))
-    .pipe(uglify().on('error', function(e){
-            console.log(e);
-         }))
-    .pipe(sourcemaps.write())
+  var stream = gulp.src('src/js/**/*.js')
+    .pipe(sourcemaps.init());
+
+  if (env === 'PROD') {
+    stream.pipe(uglify().on('error', function(e){
+      console.log(e);
+    }));
+  }
+
+  return stream.pipe(sourcemaps.write())
     .pipe(gulp.dest('target/js'));
 });
 

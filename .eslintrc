@@ -9,6 +9,8 @@
   },
   "extends": "eslint:recommended",
   "rules": {
+    "no-unused-vars": 0,
+    "no-undef": 0,
     "complexity": 2,
     "guard-for-in": 2,
     "no-alert": 2,

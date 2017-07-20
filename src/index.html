@@ -4,40 +4,29 @@
 	<title>This Troll.</title>
 	<link rel="stylesheet" type="text/css" href="stylesheets/thistroll.css" />
 	<link rel="shortcut icon" href="resources/images/favicon.png" />
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="js/thistroll.js"></script>
 </head>
 
 <body>
 	<div class="titleBar">
 		<img class="banner" src="resources/images/thistroll_banner.jpg" />
 	</div>
-
 	<hr/>
 	<div class="main">
-		<div class="blogList">
-		</div>
 		<div class="blog">
-			<h1>Hello World</h1>
-			<h2>July 15, 2017</h2>
-			<p>Hello world!</p>
-			<p>Mike here, sitting on a couch in a Chiapas hostel watching rain pound against the glass ceiling.</p>
-			<p>I have been on the road about two months now. I plan to start writing a travel blog on this website. I'll back up to the beginning too. Promise.</p>
-			<p>I also am excited to create a troll which I will set to guard my blog. He won't be too talkative at first, but go easy on him. Trolls are slow learners. And I plan to teach him a thing or two.</p>
-			<p>The pieces are in place, as many a sports coach would say. I have an EC2 tomcat instance up and running with connectivity to a DynamoDB instance. I have an S3 bucket serving up a static website. Next up I need to learn a couple JS technologies and
-				get a FE build running. Still waiting on a troll media package as well. But things are coming along.</p>
-			<p>In other news, the World Series of Poker Day 5 chip leader is an Argentinian poker pro who played at my table during last year's main event. I paid him off on a big pot where he rivered the nuts with a 9-high straight and I had the second nuts with
-				an 8-high straight. I will be vehemently rooting against him. My favorite poker player - Liv Boeree - has been eliminated, but not before winning me $100 in this year's WSOP pool! So that's cool.</p>
-			<p>Hasta luego. Tengo trabajo hacer.</p>
-			<div class="centerDiv">
-				<iframe class="blogMedia" width="373" height="210" src="https://www.youtube.com/embed/Y_o57aIhRvA" frameborder="0" allowfullscreen></iframe>
-			</div>
-		</div>
-		<div class="troll">
+			<h1 id="blogTitle"></h1>
+			<h2 id="blogDate"></h2>
+			<div id="blogText"></div>
 		</div>
 	</div>
 	<hr/>
 	<div class="footer">
 		<p>Contact: <a href="mailto:michaelwilklow@gmail.com">michaelwilklow@gmail.com</a></p>
 	</div>
+	<script>
+		$(document).ready(troll.loadCurrentBlog());
+	</script>
 </body>
 
 </html>
