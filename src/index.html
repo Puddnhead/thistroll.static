@@ -3,7 +3,7 @@
 <head>
 	<title>This Troll.</title>
 	<link rel="stylesheet" type="text/css" href="stylesheets/thistroll.css" />
-	<link rel="shortcut icon" href="resources/images/favicon.png" />
+	<link rel="shortcut icon" href="resources/images/troll_icon.png" />
 	<script src="js/jquery-3.2.1.min.js"></script>
 	<script src="js/thistroll.js"></script>
 </head>
@@ -14,10 +14,21 @@
 	</div>
 	<hr/>
 	<div class="main">
-		<div class="blog">
+		<div class="blogNavDiv" id="blogNavDiv">
+			<h3>BLOGS</h3>
+			<ul id="blogList" class="blogList"></ul>
+		</div>
+		<div class="blog" id="blogDiv">
 			<h1 id="blogTitle"></h1>
 			<h2 id="blogDate"></h2>
 			<div id="blogText"></div>
+		</div>
+		<div class="trollDiv" id="trollDiv">
+			<div class="centerDiv">
+				<img class="troll" src="resources/images/thistroll.png" />
+			</div>
+			<br/>
+			<textarea class="trollTextarea" disabled="true">Hello world! Apparently I'm a troll.</textarea>
 		</div>
 	</div>
 	<hr/>
@@ -25,7 +36,10 @@
 		<p>Contact: <a href="mailto:michaelwilklow@gmail.com">michaelwilklow@gmail.com</a></p>
 	</div>
 	<script>
-		$(document).ready(troll.loadCurrentBlog());
+		$(document).ready(function () {
+			troll.loadCurrentBlog();
+			troll.loadBlogList();
+		});
 	</script>
 </body>
 

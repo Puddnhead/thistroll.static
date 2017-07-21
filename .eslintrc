@@ -20,8 +20,6 @@
     "no-floating-decimal": 1,
     "no-extra-label": 1,
     "no-extra-parens": 1,
-    "no-invalid-this": 2,
-    "no-magic-numbers": 1,
     "no-new": 2,
     "no-return-assign": 2,
     "no-self-compare": 2,

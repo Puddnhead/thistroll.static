@@ -6,6 +6,8 @@ $hrGrey: #333333;
 $sidebarGrey: #aaaaaa;
 $blogGrey: #dddddd;
 
+$standardMargin: 25px;
+
 @font-face {
   font-family: BerlinSans;
   src: url("../resources/fonts/Berlin_Sans_FB_Regular.ttf");
@@ -36,6 +38,10 @@ body {
       text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
       padding:5px;
       margin: 0px;
+    }
+
+    h3 {
+      font-weight: bold;
     }
 
     hr {
@@ -70,16 +76,82 @@ body {
       text-align: center;
       background-color: $sidebarGrey;
 
+      .blogNavDiv {
+        top: auto;
+        object-position: top;
+        display: inline-block;
+        vertical-align: top;
+        text-align: center;
+        margin-left: auto;
+        margin-right: $standardMargin;
+        margin-top: $standardMargin;
+        margin-bottom: $standardMargin;
+        width: 225px;
+        padding: 15px;
+        background-color: $mustard;
+        border-radius: 20px;
+
+        ul {
+          padding: 0px;
+          list-style-type: none;
+
+          li {
+            padding-top: 5px;
+            padding-bottom: 5px;
+
+            a {
+              color: $trollRed;
+              text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+              letter-spacing: 1px;
+              text-decoration-line: none;
+            }
+
+            a:hover {
+              text-transform: uppercase;
+            }
+          }
+        }
+      }
+
       .blog {
         display: inline-block;
+        vertical-align: top;
+        border-radius: 20px;
         text-align: left;
-        margin-top: 0px;
-        margin-bottom: 0px;
+        margin-top: $standardMargin;
+        margin-bottom: $standardMargin;
         margin-left: auto;
         margin-right: auto;
         width: 500px;
-        padding: 15px;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-bottom: 30px;
+        padding-top: 30px;
         background-color: $blogGrey;
+      }
+
+      .trollDiv {
+        display: inline-block;
+        vertical-align: top;
+        background-color: $mustard;
+        border-radius: 20px;
+        margin-top: $standardMargin;
+        margin-bottom: $standardMargin;
+        margin-left: $standardMargin;
+        margin-right: auto;
+        padding-top: 30px;
+        padding-bottom: 30px;
+        width: 250px;
+
+        .troll {
+          display: inline-block;
+        }
+
+        .trollTextarea {
+          display: inline-block;
+          width: 200px;
+          height: 200px;
+        }
       }
     }
 
