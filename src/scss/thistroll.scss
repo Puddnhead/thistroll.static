@@ -86,7 +86,8 @@ body {
         margin-right: $standardMargin;
         margin-top: $standardMargin;
         margin-bottom: $standardMargin;
-        width: 225px;
+        width: 20%;
+        max-width: 225px;
         padding: 15px;
         background-color: $mustard;
         border-radius: 20px;
@@ -122,7 +123,8 @@ body {
         margin-bottom: $standardMargin;
         margin-left: auto;
         margin-right: auto;
-        width: 500px;
+        width: 58%;
+        max-width: 550px;
         padding-left: 20px;
         padding-right: 20px;
         padding-bottom: 30px;
@@ -141,7 +143,8 @@ body {
         margin-right: auto;
         padding-top: 30px;
         padding-bottom: 30px;
-        width: 250px;
+        width: 22%;
+        max-width: 250px;
 
         .troll {
           display: inline-block;
