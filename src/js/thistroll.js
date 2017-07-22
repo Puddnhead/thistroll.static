@@ -1,14 +1,15 @@
 var troll = {
 
   // location of the ec2 server
-  //serverHost: "http://thistroll.us-east-2.elasticbeanstalk.com",
-   serverHost: "http://localhost:8081",
+  serverHost: "http://thistroll.us-east-2.elasticbeanstalk.com",
+  //serverHost: "http://localhost:8081",
 
   loadCurrentBlog: function () {
     var blogTitleH1 = document.getElementById("blogTitle"),
       blogDateH2 = document.getElementById("blogDate"),
       blogTextDiv = document.getElementById("blogText"),
-      endpoint = this.serverHost + "/blog/current";
+      blogId = $.getUrlVar("blog"),
+      endpoint = blogId ? this.serverHost + "/blog?id=" + blogId : this.serverHost + "/blog/current";
 
     $.get(endpoint, function (blog) {
       blogTitleH1.innerHTML = blog.title;
