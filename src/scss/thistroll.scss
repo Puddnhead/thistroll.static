@@ -86,7 +86,7 @@ body {
         margin-right: $standardMargin;
         margin-top: $standardMargin;
         margin-bottom: $standardMargin;
-        width: 20%;
+        width: 14%;
         max-width: 225px;
         padding: 15px;
         background-color: $mustard;
@@ -124,7 +124,7 @@ body {
         margin-left: auto;
         margin-right: auto;
         width: 58%;
-        max-width: 550px;
+        max-width: 525px;
         padding-left: 20px;
         padding-right: 20px;
         padding-bottom: 30px;
@@ -143,15 +143,18 @@ body {
         margin-right: auto;
         padding-top: 30px;
         padding-bottom: 30px;
-        width: 22%;
+        width: 18%;
         max-width: 250px;
 
         .troll {
           display: inline-block;
+          max-width: 100%;
+          max-height: 100%;
         }
 
         .trollTextarea {
           display: inline-block;
+          max-width: 100%;
           width: 200px;
           height: 200px;
         }
