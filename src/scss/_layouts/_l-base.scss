@@ -1,0 +1,20 @@
+#header {
+  background-color: $mustard;
+  margin: 0px;
+
+  .banner {
+      margin: 0px;
+      height: 100px;
+  }
+}
+
+#main {
+  text-align: center;
+  background-color: $sidebarGrey;
+}
+
+#footer {
+  font-family: BerlinSans;
+  text-align: center;
+  background-color: $mustard;
+}

@@ -1,0 +1,11 @@
+@mixin baseModule {
+  display: inline-block;
+  vertical-align: top;
+  margin-top: $standardMargin;
+  margin-bottom: $standardMargin;
+  border-radius: 20px;
+}
+
+.centerDiv {
+  text-align: center;
+}

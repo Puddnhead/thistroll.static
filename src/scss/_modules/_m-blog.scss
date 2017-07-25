@@ -1,0 +1,29 @@
+.blog {
+  @include baseModule;
+
+  margin-left: auto;
+  margin-right: auto;
+  width: 58%;
+  max-width: 525px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 30px;
+  padding-top: 30px;
+
+  background-color: $blogGrey;
+
+  text-align: left;
+
+  a {
+    color: $trollRed;
+    text-decoration-line: none;
+    size: 1.25em;
+  }
+}
+
+.blogMedia {
+  display: inline-block;
+  
+  margin-left: auto;
+  margin-right: auto;
+}
