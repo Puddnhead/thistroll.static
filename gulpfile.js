@@ -3,12 +3,31 @@
 // grab our gulp packages
 var gulp = require('gulp'),
   runSequence = require('run-sequence'),
-  eslint = require('gulp-eslint'),
-	sass = require('gulp-sass'),
-	sourcemaps = require('gulp-sourcemaps'),
-	uglify = require('gulp-uglify'),
-	del = require('del'),
-  env = 'DEV';
+  eslint     = require('gulp-eslint'),
+	sass       = require('gulp-sass'),
+  uglify     = require('gulp-uglify'),
+	del        = require('del'),
+  babelify   = require('babelify'),
+  browserify = require('browserify'),
+  buffer     = require('vinyl-buffer'),
+  coffeeify  = require('coffeeify'),
+  gutil      = require('gulp-util'),
+  livereload = require('gulp-livereload'),
+  merge      = require('merge'),
+  rename     = require('gulp-rename'),
+  source     = require('vinyl-source-stream'),
+  sourceMaps = require('gulp-sourcemaps'),
+  watchify   = require('watchify');
+
+var env = 'DEV',
+  config = {
+    js: {
+        src: './src/js/main.js',       // Entry point
+        outputDir: './target/js/',  // Directory to save bundle to
+        mapDir: './maps/',      // Subdirectory to save maps to
+        outputFile: 'bundle.js' // Name to use for bundle
+    },
+  };
 
 // default build doesn't uglify JS
 gulp.task('default', function () {
@@ -25,7 +44,7 @@ function runBuild() {
     'eslint',
     'clean',
     'build-css',
-    'build-js',
+    'bundle',
     'copyHtml',
     'copyResources'
   );
@@ -46,24 +65,10 @@ gulp.task('eslint', function() {
 
 gulp.task('build-css', function() {
   return gulp.src('src/scss/**/*.scss')
-	.pipe(sourcemaps.init())  // Process the original sources
+	.pipe(sourceMaps.init())  // Process the original sources
 	.pipe(sass())
-	.pipe(sourcemaps.write()) // Add the map to modified source.
+	.pipe(sourceMaps.write()) // Add the map to modified source.
   .pipe(gulp.dest('target/stylesheets'));
-});
-
-gulp.task('build-js', function() {
-  var stream = gulp.src('src/js/**/*.js')
-    .pipe(sourcemaps.init());
-
-  if (env === 'PROD') {
-    stream.pipe(uglify().on('error', function(e){
-      console.log(e);
-    }));
-  }
-
-  return stream.pipe(sourcemaps.write())
-    .pipe(gulp.dest('target/js'));
 });
 
 gulp.task('copyHtml', function() {
@@ -72,4 +77,35 @@ gulp.task('copyHtml', function() {
 
 gulp.task('copyResources', function() {
   gulp.src('src/resources/**').pipe(gulp.dest('target/resources'));
+});
+
+// This method makes it easy to use common bundling options in different tasks
+function bundle (bundler, includeSourceMaps) {
+
+    // Add options to add to "base" bundler passed as parameter
+    bundler = bundler
+      .bundle()                                                        // Start bundle
+      .pipe(source(config.js.src))                        // Entry point
+      .pipe(buffer())                                               // Convert to gulp pipeline
+      .pipe(rename(config.js.outputFile));          // Rename output from 'main.js'
+
+    if (includeSourceMaps) {                                                //   to 'bundle.js'
+      bundler = bundler.pipe(sourceMaps.init({ loadMaps : true }))  // Strip inline source maps
+      .pipe(sourceMaps.write(config.js.mapDir));    // Save source maps to their
+    }                                                                                //   own directory
+
+    bundler.pipe(gulp.dest(config.js.outputDir))        // Save 'bundle' to build/
+      .pipe(livereload());                                       // Reload browser if relevant
+}
+
+gulp.task('bundle', function () {
+    var bundler = browserify(config.js.src)  // Pass browserify the entry point
+                                .transform(coffeeify)      //  Chain transformations: First, coffeeify . . .
+                                .transform(babelify, { presets : [ 'es2015' ] });  // Then, babelify, with ES2015 preset
+
+    if (env === "PROD") {
+      bundle(bundler, false);  // Chain other options -- sourcemaps, rename, etc.
+    } else {
+      bundle(bundler, true);
+    }
 });
