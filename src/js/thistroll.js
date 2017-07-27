@@ -12,6 +12,7 @@ module.exports = {
 
   loadCurrentBlog: function () {
     const blogTitleH1 = document.getElementById("blogTitle"),
+      blogLocationH2 = document.getElementById("blogLocation"),
       blogDateH2 = document.getElementById("blogDate"),
       blogTextDiv = document.getElementById("blogText"),
       blogId = queryString.parse(location.search).blog,
@@ -19,6 +20,7 @@ module.exports = {
 
     $.get(endpoint, function (blog) {
       blogTitleH1.innerHTML = blog.title;
+      blogLocationH2.innerHTML = blog.location ? blog.location : "";
       blogDateH2.innerHTML = blog.createdOn ? new moment(blog.createdOn).format("LL") : "";
       blogTextDiv.innerHTML = blog.text;
     });
@@ -28,12 +30,17 @@ module.exports = {
     const endpoint = this.serverHost + "/blog/all",
       blogList = document.getElementById("blogList");
 
-    let index, blogCount;
+    let index, blogCount, listItem;
 
     $.get(endpoint, function (blogs) {
       for (index = 0, blogCount = blogs.length; index < blogCount; index++) {
-        blogList.innerHTML += "<li><a href='index.html?blog=" +
-          blogs[index].id + "'>" + blogs[index].title + "</a></li>";
+        listItem = "<li><p class='blogListTitle'><a href='index.html?blog=" +
+          blogs[index].id + "'>" + blogs[index].title + "</a></p>";
+        if (blogs[index].location) {
+          listItem += "<p class='blogListLocation'>" + blogs[index].location + "</p>";
+        }
+        listItem += "</li>";
+        blogList.innerHTML += listItem;
       }
     });
   },
