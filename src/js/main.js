@@ -1,4 +1,4 @@
-var $ = require("jquery"),
+const $ = require("jquery"),
   thistroll = require("./thistroll");
 $(document).ready(function () {
   thistroll.loadCurrentBlog();

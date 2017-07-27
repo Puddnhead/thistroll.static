@@ -1,7 +1,7 @@
 /* File: gulpfile.js */
 
 // grab our gulp packages
-var gulp = require('gulp'),
+const gulp = require('gulp'),
   runSequence = require('run-sequence'),
   eslint     = require('gulp-eslint'),
 	sass       = require('gulp-sass'),
@@ -19,7 +19,7 @@ var gulp = require('gulp'),
   sourceMaps = require('gulp-sourcemaps'),
   watchify   = require('watchify');
 
-var env = 'DEV',
+let env = 'DEV',
   config = {
     js: {
         src: './src/js/main.js',       // Entry point
@@ -84,27 +84,27 @@ function bundle (bundler, includeSourceMaps) {
 
     // Add options to add to "base" bundler passed as parameter
     bundler = bundler
-      .bundle()                                                        // Start bundle
-      .pipe(source(config.js.src))                        // Entry point
-      .pipe(buffer())                                               // Convert to gulp pipeline
-      .pipe(rename(config.js.outputFile));          // Rename output from 'main.js'
+      .bundle()                             // Start bundle
+      .pipe(source(config.js.src))          // Entry point
+      .pipe(buffer())                       // Convert to gulp pipeline
+      .pipe(rename(config.js.outputFile)); // Rename output
 
-    if (includeSourceMaps) {                                                //   to 'bundle.js'
-      bundler = bundler.pipe(sourceMaps.init({ loadMaps : true }))  // Strip inline source maps
-      .pipe(sourceMaps.write(config.js.mapDir));    // Save source maps to their
-    }                                                                                //   own directory
+    if (includeSourceMaps) {
+      bundler = bundler.pipe(sourceMaps.init({ loadMaps : true }))
+      .pipe(sourceMaps.write(config.js.mapDir));      // Save source maps to their own directory
+    }
 
-    bundler.pipe(gulp.dest(config.js.outputDir))        // Save 'bundle' to build/
-      .pipe(livereload());                                       // Reload browser if relevant
+    bundler.pipe(gulp.dest(config.js.outputDir))
+      .pipe(livereload());       // reload browser if relevant
 }
 
 gulp.task('bundle', function () {
-    var bundler = browserify(config.js.src)  // Pass browserify the entry point
-                                .transform(coffeeify)      //  Chain transformations: First, coffeeify . . .
-                                .transform(babelify, { presets : [ 'es2015' ] });  // Then, babelify, with ES2015 preset
+    var bundler = browserify(config.js.src)
+                                .transform(coffeeify)
+                                .transform(babelify, { presets : [ 'es2015' ] });
 
-    if (env === "PROD") {
-      bundle(bundler, false);  // Chain other options -- sourcemaps, rename, etc.
+    if (env === 'PROD') {
+      bundle(bundler, false);
     } else {
       bundle(bundler, true);
     }

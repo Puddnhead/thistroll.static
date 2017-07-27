@@ -1,21 +1,6 @@
-var $ = require("jquery");
-
-$.extend({
-  getUrlVars: function() {
-    var vars = [], hash;
-    var hashes = window.location.href.slice(window.location.href.indexOf("?") + 1).split("&");
-    for(var i = 0; i < hashes.length; i++)
-    {
-      hash = hashes[i].split("=");
-      vars.push(hash[0]);
-      vars[hash[0]] = hash[1];
-    }
-    return vars;
-  },
-  getUrlVar: function(name) {
-    return $.getUrlVars()[name];
-  }
-});
+const $ = require("jquery"),
+  queryString = require("query-string"),
+  moment = require("moment");
 
 module.exports = {
 
@@ -24,24 +9,24 @@ module.exports = {
   // serverHost: "http://localhost:8081",
 
   loadCurrentBlog: function () {
-    var blogTitleH1 = document.getElementById("blogTitle"),
+    const blogTitleH1 = document.getElementById("blogTitle"),
       blogDateH2 = document.getElementById("blogDate"),
       blogTextDiv = document.getElementById("blogText"),
-      blogId = $.getUrlVar("blog"),
+      blogId = queryString.parse(location.search).blog,
       endpoint = blogId ? this.serverHost + "/blog?id=" + blogId : this.serverHost + "/blog/current";
 
     $.get(endpoint, function (blog) {
       blogTitleH1.innerHTML = blog.title;
-      blogDateH2.innerHTML = blog.createdOn ? new Date(blog.createdOn).toLocaleDateString() : "";
+      blogDateH2.innerHTML = blog.createdOn ? new moment(blog.createdOn).format("LL") : "";
       blogTextDiv.innerHTML = blog.text;
     });
   },
 
   loadBlogList: function () {
-    var endpoint = this.serverHost + "/blog/all",
-      blogList = document.getElementById("blogList"),
-      index,
-      blogCount;
+    const endpoint = this.serverHost + "/blog/all",
+      blogList = document.getElementById("blogList");
+
+    let index, blogCount;
 
     $.get(endpoint, function (blogs) {
       for (index = 0, blogCount = blogs.length; index < blogCount; index++) {
