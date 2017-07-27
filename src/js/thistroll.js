@@ -7,8 +7,8 @@ let clearTextareaNextAction = true;
 module.exports = {
 
   // location of the ec2 server
-  //serverHost: "http://thistroll.us-east-2.elasticbeanstalk.com",
-   serverHost: "http://localhost:8081",
+  serverHost: "http://thistroll.us-east-2.elasticbeanstalk.com",
+  //serverHost: "http://localhost:8081",
 
   loadCurrentBlog: function () {
     const blogTitleH1 = document.getElementById("blogTitle"),
