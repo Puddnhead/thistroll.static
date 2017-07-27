@@ -2,11 +2,13 @@ const $ = require("jquery"),
   queryString = require("query-string"),
   moment = require("moment");
 
+let clearTextareaNextAction = true;
+
 module.exports = {
 
   // location of the ec2 server
-  serverHost: "http://thistroll.us-east-2.elasticbeanstalk.com",
-  // serverHost: "http://localhost:8081",
+  //serverHost: "http://thistroll.us-east-2.elasticbeanstalk.com",
+   serverHost: "http://localhost:8081",
 
   loadCurrentBlog: function () {
     const blogTitleH1 = document.getElementById("blogTitle"),
@@ -32,6 +34,36 @@ module.exports = {
       for (index = 0, blogCount = blogs.length; index < blogCount; index++) {
         blogList.innerHTML += "<li><a href='index.html?blog=" +
           blogs[index].id + "'>" + blogs[index].title + "</a></li>";
+      }
+    });
+  },
+
+  registerTrollListeners: function () {
+    const textBox = document.getElementById("trollTextarea"),
+      endpoint = this.serverHost + "/troll";
+
+    textBox.addEventListener("focus", function () {
+      if (clearTextareaNextAction) {
+        textBox.value = "";
+        clearTextareaNextAction = false;
+      }
+    });
+
+    textBox.addEventListener("keypress", function (event) {
+      if (clearTextareaNextAction) {
+        clearTextareaNextAction = false;
+        textBox.value = "";
+      } else if (event.charCode === 13) {
+        $.ajax({
+            type: "POST",
+            url: endpoint,
+            data: textBox.value,
+            contentType: "text/plain",
+            success: function (answer) {
+              clearTextareaNextAction = true;
+              textBox.value = answer;
+            }
+        });
       }
     });
   }

@@ -3,4 +3,5 @@ const $ = require("jquery"),
 $(document).ready(function () {
   thistroll.loadCurrentBlog();
   thistroll.loadBlogList();
+  thistroll.registerTrollListeners();
 });
