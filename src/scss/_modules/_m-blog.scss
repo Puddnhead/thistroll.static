@@ -21,6 +21,13 @@
   }
 }
 
+.blogDate {
+  border: 0;
+
+  color: black;
+  text-align: right;
+}
+
 .blogText {
   margin-top: $standardMargin;
 }
@@ -30,9 +37,4 @@
 
   margin-left: auto;
   margin-right: auto;
-}
-
-.blogLocation {
-  color: black;
-  font-style: italic;
 }

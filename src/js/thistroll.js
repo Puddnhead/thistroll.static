@@ -57,18 +57,24 @@ module.exports = {
     });
 
     textBox.addEventListener("keypress", function (event) {
+      let messageForTroll;
+
       if (clearTextareaNextAction) {
         clearTextareaNextAction = false;
         textBox.value = "";
       } else if (event.charCode === 13) {
+        messageForTroll = textBox.value;
+        textBox.value = "...";
+        textBox.disabled = true;
         $.ajax({
             type: "POST",
             url: endpoint,
-            data: textBox.value,
+            data: messageForTroll,
             contentType: "text/plain",
             success: function (answer) {
               clearTextareaNextAction = true;
               textBox.value = answer;
+              textBox.disabled = false;
             }
         });
       }
