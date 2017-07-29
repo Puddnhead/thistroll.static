@@ -55,7 +55,7 @@ gulp.task('clean', function () {
 });
 
 gulp.task('eslint', function() {
-	return gulp.src(['src/**/*.js','!node_modules/**','!src/js/jquery-3.2.1.min.js'])
+	return gulp.src(['src/**/*.js','!node_modules/**','!src/test/**'])
 			.pipe(eslint())
 			// eslint.format() outputs the lint results to the console.
 			// Alternatively use eslint.formatEach() (see Docs).
