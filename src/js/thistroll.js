@@ -1,6 +1,6 @@
-const $ = require("jquery"),
+const $ =       require("jquery"),
   queryString = require("query-string"),
-  moment = require("moment");
+  moment =      require("moment");
 
 let clearTextareaNextAction = true;
 
