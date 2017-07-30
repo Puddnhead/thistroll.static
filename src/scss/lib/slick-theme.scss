@@ -68,8 +68,9 @@
     font-size: 20px;
     line-height: 1;
 
-    opacity: .75;
-    color: white;
+/* Patched */
+    opacity: .50;
+    color: black;
 
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

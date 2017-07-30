@@ -12,14 +12,15 @@ module.exports = {
       blogDateH2 = document.getElementById("blogDate"),
       blogTextDiv = document.getElementById("blogText"),
       blogId = queryString.parse(location.search).blog,
-      endpoint = blogId ? properties.serverHost + "/blog?id=" + blogId : properties.serverHost + "/blog/current";
+      endpoint = blogId ? properties.serverHost + "/blog/" + blogId : properties.serverHost + "/blog/current";
 
     $.get(endpoint, function (blog) {
+      this.loadBlogImages(blog.id);
       blogTitleH1.innerHTML = blog.title;
       blogLocationH2.innerHTML = blog.location ? blog.location : "";
       blogDateH2.innerHTML = blog.createdOn ? new moment(blog.createdOn).format("LL") : "";
       blogTextDiv.innerHTML = blog.text;
-    });
+    }.bind(this));
   },
 
   loadBlogList: function () {
@@ -41,17 +42,34 @@ module.exports = {
     });
   },
 
-  loadBlogImages: function () {
-    let carousel = document.getElementById("carousel");
+  loadBlogImages: function (blogId) {
+    const endpoint = properties.serverHost + "/blog/" + blogId + "/images",
+      carousel = document.getElementById("carousel");
 
-    slick($(carousel), {
-      slidesToShow: 1,
-      slidesToScroll: 3,
-      lazyLoad: true,
-      centerMode: true,
-      dots: true,
-      speed: 500,
-      centerPadding: "10%"
+    let index, imageCount;
+
+    $.get(endpoint, function (imageUrls) {
+      if (imageUrls) {
+        $(carousel).removeAttr("hidden");
+
+        for (index = 0, imageCount = imageUrls.length; index < imageCount; index++) {
+          carousel.innerHTML += "<div class='slide'><img class='slideImage' src='" + imageUrls[index] + "' /></div>";
+        }
+
+        if (imageCount % 2 === 0) {
+          carousel.innerHTML += "<div class='slide'><img class='slideImage' src='resources/images/favicon.png' /></div>";
+        }
+
+        slick($(carousel), {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          lazyLoad: true,
+          centerMode: true,
+          dots: true,
+          speed: 500,
+          centerPadding: "10%"
+        });
+      }
     });
   }
 };

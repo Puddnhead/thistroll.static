@@ -5,7 +5,6 @@ const $ = require("jquery"),
 $(document).ready(function () {
   blogs.loadCurrentBlog();
   blogs.loadBlogList();
-  blogs.loadBlogImages();
 
   troll.registerTrollListeners();
 });
