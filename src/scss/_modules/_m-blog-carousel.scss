@@ -1,0 +1,22 @@
+.carousel {
+  margin: 10px;
+  margin-left: 50px;
+  margin-right: 50px;
+  height: 100px;
+}
+
+.slide {
+  padding: 10px;
+  margin-left: auto;
+  margin-right: auto;
+
+  height: 100px;
+}
+
+.slick-prev:before, .slick-next:before {
+  color: black;
+}
+
+.slick-dots {
+  margin-bottom: $standardMargin;
+}

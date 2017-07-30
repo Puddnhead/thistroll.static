@@ -1,8 +1,11 @@
 const $ = require("jquery"),
-  thistroll = require("./thistroll");
-  
+  blogs = require("./blogs"),
+  troll = require("./troll");
+
 $(document).ready(function () {
-  thistroll.loadCurrentBlog();
-  thistroll.loadBlogList();
-  thistroll.registerTrollListeners();
+  blogs.loadCurrentBlog();
+  blogs.loadBlogList();
+  blogs.loadBlogImages();
+
+  troll.registerTrollListeners();
 });

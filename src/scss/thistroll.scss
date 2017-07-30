@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+// External libraries
+@import "lib/slick-theme";
+@import "lib/slick";
+
 // Base styles
 @import "_base/_config",
         "_base/_presets";
@@ -10,5 +14,6 @@
 // Module styles
 @import "_modules/_m-base";
 @import "_modules/_m-blog";
+@import "_modules/_m-blog-carousel";
 @import "_modules/_m-blogList";
 @import "_modules/_m-troll";
