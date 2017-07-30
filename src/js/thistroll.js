@@ -17,7 +17,7 @@ module.exports = {
       blogDateH2 = document.getElementById("blogDate"),
       blogTextDiv = document.getElementById("blogText"),
       blogId = queryString.parse(location.search).blog,
-      endpoint = blogId ? this.serverHost + "/blog?id=" + blogId : this.serverHost + "/blog/current";
+      endpoint = blogId ? this.serverHost + "/blog/" + blogId : this.serverHost + "/blog/current";
 
     $.get(endpoint, function (blog) {
       blogTitleH1.innerHTML = blog.title;
