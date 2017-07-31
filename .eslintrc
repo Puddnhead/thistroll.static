@@ -32,7 +32,7 @@
     "no-lone-blocks": 2,
     "no-loop-func": 2,
     "no-mixed-requires": 2,
-    "no-new": 2,
+    "no-new": 0,
     "no-new-func": 2,
     "no-new-object": 2,
     "no-new-require": 1,

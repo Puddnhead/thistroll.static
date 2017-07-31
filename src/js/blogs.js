@@ -2,7 +2,8 @@ const $ =       require("jquery"),
   queryString = require("query-string"),
   moment =      require("moment"),
   slick =       require("slick-carousel-browserify"),
-  properties =  require("./properties");
+  properties =  require("./properties"),
+  LuminousGallery =    require("luminous-lightbox").LuminousGallery;
 
 module.exports = {
 
@@ -49,11 +50,13 @@ module.exports = {
     let index, imageCount;
 
     $.get(endpoint, function (imageUrls) {
-      if (imageUrls) {
-        $(carousel).removeAttr("hidden");
+      if (imageUrls && imageUrls.length) {
+        $(carousel).css("display", "block");
 
         for (index = 0, imageCount = imageUrls.length; index < imageCount; index++) {
-          carousel.innerHTML += "<div class='slide'><img class='slideImage' src='" + imageUrls[index] + "' /></div>";
+          carousel.innerHTML += "<div class='slide'>"
+            + "<a class='lightboxTrigger' href='" + imageUrls[index] + "'>"
+            + "<img class='slideImage' src='" + imageUrls[index] + "' /></a></div>";
         }
 
         if (imageCount % 2 === 0) {
@@ -63,12 +66,15 @@ module.exports = {
         slick($(carousel), {
           slidesToShow: 1,
           slidesToScroll: 1,
-          lazyLoad: true,
+          lazyLoad: false,
           centerMode: true,
           dots: true,
           speed: 500,
           centerPadding: "10%"
         });
+
+
+        new LuminousGallery(document.querySelectorAll(".lightboxTrigger"));
       }
     });
   }
