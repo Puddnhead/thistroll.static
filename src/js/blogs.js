@@ -60,7 +60,7 @@ module.exports = {
         }
 
         if (imageCount % 2 === 0) {
-          carousel.innerHTML += "<div class='slide'><img class='slideImage' src='resources/images/favicon.png' /></div>";
+          carousel.innerHTML += "<div class='slide'><img class='slideImage' src='resources/images/troll_icon.png' /></div>";
         }
 
         slick($(carousel), {
