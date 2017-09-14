@@ -25,7 +25,7 @@ module.exports = {
   },
 
   loadBlogList: function () {
-    const endpoint = properties.serverHost + "/blog/all",
+    const endpoint = properties.serverHost + "/blog/page",
       blogList = document.getElementById("blogList");
 
     let index, blogCount, listItem;
