@@ -1,8 +1,10 @@
+$carouselHeight: 150px;
+
 .carousel {
   margin: 10px;
   margin-left: 50px;
   margin-right: 50px;
-  height: 100px;
+  height: $carouselHeight;
   display: none;
 }
 
@@ -11,7 +13,7 @@
   margin-left: auto;
   margin-right: auto;
 
-  height: 100px;
+  height: $carouselHeight;
 }
 
 .slick-dots {
