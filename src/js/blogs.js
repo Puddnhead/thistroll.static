@@ -6,6 +6,7 @@ const $ =       require("jquery"),
   LuminousGallery =    require("luminous-lightbox").LuminousGallery;
 
 module.exports = {
+  blogListPage: 0,
 
   loadCurrentBlog: function () {
     const blogTitleH1 = document.getElementById("blogTitle"),
@@ -24,13 +25,14 @@ module.exports = {
     }.bind(this));
   },
 
-  loadBlogList: function () {
-    const endpoint = properties.serverHost + "/blog/page",
-      blogList = document.getElementById("blogList");
+  loadNextBlogListPage: function () {
+    const endpoint = properties.serverHost + "/blog/page?pageNumber=" + this.blogListPage,
+      blogList = document.getElementById("blogList"),
+      seeMoreLink = document.getElementById("seeMoreLink");
+    let index, blogCount, listItem, blogs;
 
-    let index, blogCount, listItem;
-
-    $.get(endpoint, function (blogs) {
+    $.get(endpoint, function (response) {
+      blogs = response.blogs;
       for (index = 0, blogCount = blogs.length; index < blogCount; index++) {
         listItem = "<li><p class='blogListTitle'><a href='index.html?blog=" +
           blogs[index].id + "'>" + blogs[index].title + "</a></p>";
@@ -40,7 +42,13 @@ module.exports = {
         listItem += "</li>";
         blogList.innerHTML += listItem;
       }
+      if (!response.lastPage) {
+        seeMoreLink.style.display = "inline";
+      } else {
+        seeMoreLink.style.display = "none";
+      }
     });
+    this.blogListPage++;
   },
 
   loadBlogImages: function (blogId) {
@@ -77,5 +85,10 @@ module.exports = {
         new LuminousGallery(document.querySelectorAll(".lightboxTrigger"));
       }
     });
+  },
+
+  registerBlogListListeners: function() {
+    const seeMoreLink = document.getElementById("seeMoreLink");
+    seeMoreLink.addEventListener("click", this.loadNextBlogListPage.bind(this));
   }
 };

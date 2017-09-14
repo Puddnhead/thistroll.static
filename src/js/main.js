@@ -4,7 +4,8 @@ const $ = require("jquery"),
 
 $(document).ready(function () {
   blogs.loadCurrentBlog();
-  blogs.loadBlogList();
+  blogs.loadNextBlogListPage();
+  blogs.registerBlogListListeners();
 
   troll.registerTrollListeners();
 });
