@@ -3,6 +3,7 @@ $subscribePadding: 10px;
 .subscribeDiv {
   @include baseModule
 
+  display: inline-block;
   display: none;
 
   margin-top: $standardMargin;
@@ -48,6 +49,7 @@ $subscribePadding: 10px;
 }
 
 .subscribeButton {
+  margin-top: $standardMargin;
   padding-top: $subscribePadding;
   padding-bottom: $subscribePadding;
   padding-left: 50px;

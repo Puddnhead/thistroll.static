@@ -3,14 +3,22 @@ const properties =  require("./properties"),
 let $ = window.jQuery = require("jquery");
 require("parsleyjs");
 
+const animationDistance = properties.subscribe.animationDistance,
+  animationDuration = properties.subscribe.animationDuration,
+  downAnimationProps = {
+    "margin-top": "+=" + animationDistance
+  },
+  upAnimationProps = {
+    "margin-top": "-=" + animationDistance
+  };
+
 module.exports = {
 
   registerForm: function () {
     $("#headerSubscribeBtn").click(function () {
       $("#headerSubscribeBtn").hide();
-      $("#trollDiv").css("display", "none");
-      $("#subscribeDiv").css("display", "inline-block");
-    });
+      this._slideSwitchDivs($("#trollDiv"), $("#subscribeDiv"));
+    }.bind(this));
 
     $("#subscribeForm").parsley().on("field:validated", function() {
         let ok = $(".parsley-error").length === 0;
@@ -54,8 +62,7 @@ module.exports = {
 
   _handleCancel: function () {
     $("#headerSubscribeBtn").show();
-    $("#subscribeDiv").css("display", "none");
-    $("#trollDiv").css("display", "inline-block");
+    this._slideSwitchDivs($("#subscribeDiv"), $("#trollDiv"));
     this._resetForm();
   },
 
@@ -78,5 +85,23 @@ module.exports = {
     $("#subscribeForm")[0].reset();
     $(".subscribeInput").removeClass("parsley-success");
     $(".subscribeInput").removeClass("parsley-error");
+  },
+
+  _slideSwitchDivs: function (previous, next) {
+    // animate previous div down and off
+    previous.animate(downAnimationProps, animationDuration, "swing", function () {
+      // hide previous div and animate it back to its original position
+      next.css("visibility", "hidden");
+      previous.hide();
+      next.css("display", "inline-block");
+      previous.animate(upAnimationProps, 1, "swing", function () {
+          // animate next div off the page
+          next.animate(downAnimationProps, 1, "swing", function () {
+            // make next div visible and animate it back onto successGreen
+            next.css("visibility", "visible")
+              .animate(upAnimationProps, animationDuration);
+          });
+        });
+    });
   }
 }
