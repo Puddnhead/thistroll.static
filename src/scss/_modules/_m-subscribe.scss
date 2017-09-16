@@ -10,8 +10,6 @@ $subscribePadding: 10px;
   margin-bottom: $standardMargin;
   margin-left: $standardMargin;
   margin-right: auto;
-  padding-left: $standardMargin;
-  padding-right: $standardMargin;
   padding-bottom: $standardMargin;
   width: 18%;
   max-width: 250px;
@@ -21,6 +19,8 @@ $subscribePadding: 10px;
 
 .subscriptionInstructions {
   margin-bottom: $subscribePadding;
+  margin-left: $subscribePadding;
+  margin-right: $subscribePadding;
   padding-left: 0;
   padding-right: 0;
 
@@ -30,8 +30,10 @@ $subscribePadding: 10px;
 
 .subscribeInput {
   margin-top: $subscribePadding;
+  margin-left: $subscribePadding;
+  margin-right: $subscribePadding;
   padding: $subscribePadding;
-  width: 100%;
+  width: 90%;
 
   background-color: $blogGrey;
   border: 1px solid black;
