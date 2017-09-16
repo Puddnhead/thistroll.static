@@ -10,9 +10,11 @@
 <body>
 	<div id="header">
 		<img class="banner" src="resources/images/thistroll_banner.jpg" />
+    <input type="button" class="bannerButton subscribeButton" id="headerSubscribeBtn" value="SUBSCRIBE" />
 	</div>
 	<hr/>
 	<div id="main">
+    <div class="notificationsBar" id="notificationsBar"></div>
 		<div class="blogNavDiv" id="blogNavDiv">
 			<h3 class="blogListTitle">BLOGS</h3>
 			<ul id="blogList" class="blogList"></ul>
@@ -33,6 +35,26 @@
 			<br/>
 			<textarea id="trollTextarea" class="trollTextarea">Hi folks! I'm a troll! You can ask me questions! For now I pretty much only know the capital of Ukraine though. Don't ask me why. I won't know that.</textarea>
 		</div>
+    <div class="subscribeDiv" id="subscribeDiv">
+      <h3>Subscribe</h3>
+      <p class="subscriptionInstructions">Submit this form if you would like to receive emails when new blogs appear on the site.</p>
+      <form id="subscribeForm" data-parsley-validate="">
+        <input class="subscribeInput" type="text" id="usernameInput" placeholder="Username"
+            minlength="3" maxlength="20" data-parsley-pattern="\w+" data-parsley-pattern-message="Please use only alphanumeric characters in your username" required="" />
+        <input class="subscribeInput" type="email" id="emailInput" placeholder="Email"
+            maxlength="200" required="" />
+        <input class="subscribeInput" type="password" id="passwordInput" placeholder="Password"
+            minlength="6" maxlength="100" required="" />
+        <input class="subscribeInput" type="password" id="verifyPasswordInput" placeholder="Repeat Password"
+            minlength="6" maxlength="100" data-parsley-equalto="#passwordInput" required="" />
+        <input class="subscribeInput" type="text" id="firstNameInput" placeholder="First Name"
+            maxlength="100" />
+        <input class="subscribeInput" type="text" id="lastNameInput" placeholder="Last Name"
+            maxlength="100" />
+        <input type="submit" class="subscribeButton" id="subscribeButton" value="SUBSCRIBE" />
+        <p><a class="cancelLink" id="cancelLink" href="#">Cancel</a></p>
+      </form>
+    </div>
 	</div>
 	<hr/>
 	<div id="footer">

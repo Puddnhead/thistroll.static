@@ -1,0 +1,90 @@
+$subscribePadding: 10px;
+
+.subscribeDiv {
+  @include baseModule
+
+  display: none;
+
+  margin-top: $standardMargin;
+  margin-bottom: $standardMargin;
+  margin-left: $standardMargin;
+  margin-right: auto;
+  padding-left: $standardMargin;
+  padding-right: $standardMargin;
+  padding-bottom: $standardMargin;
+  width: 18%;
+  max-width: 250px;
+
+  background-color: $blogGrey;
+}
+
+.subscriptionInstructions {
+  margin-bottom: $subscribePadding;
+  padding-left: 0;
+  padding-right: 0;
+
+  text-align: left;
+  color: $darkGrey;
+}
+
+.subscribeInput {
+  margin-top: $subscribePadding;
+  padding: $subscribePadding;
+  width: 100%;
+
+  background-color: $blogGrey;
+  border: 1px solid black;
+
+  font-size: 1em;
+  color: black;
+}
+
+.subscribeInput.parsley-error {
+  background-color: $errorPink;
+}
+
+.subscribeInput.parsley-success {
+  background-color: $successGreen;
+}
+
+.subscribeButton {
+  padding-top: $subscribePadding;
+  padding-bottom: $subscribePadding;
+  padding-left: 50px;
+  padding-right: 50px;
+
+  border-radius: 4px;
+  border: 2px solid black;
+  background-color: $trollRed;
+
+  font-size: 1em;
+}
+
+.subscribeButton:hover {
+  border: 2px solid $blogGrey;
+  background-color: black;
+  color: $trollRed;
+}
+
+.bannerButton {
+  float: right;
+  margin: $standardMargin;
+}
+
+.parsley-errors-list {
+  margin-bottom: 0;
+
+  list-style: none;
+  color: $trollRed;
+  text-align: left;
+  font-size: .75em;
+}
+
+.cancelLink {
+  color: $boringLink;
+  text-decoration: none;
+}
+
+.cancelLink:visited {
+  color: $boringLink;
+}

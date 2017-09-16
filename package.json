@@ -36,6 +36,7 @@
     "jquery": "^3.2.1",
     "luminous-lightbox": "^1.0.1",
     "moment": "^2.18.1",
+    "parsleyjs": "^2.8.0",
     "query-string": "^5.0.0",
     "slick-carousel-browserify": "^1.6.12"
   }

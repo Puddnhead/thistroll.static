@@ -1,0 +1,21 @@
+.notificationsBar {
+  position: absolute;
+  width: 100%;
+  margin: 0;
+  padding: 10px;
+
+  display: none;
+  
+  color: black;
+  text-align: center;
+}
+
+.notificationsBar.success {
+  visibility: visible;
+  background-color: $successGreen;
+}
+
+.notificationsBar.error {
+  visibility: visible;;
+  background-color: $errorPink;
+}

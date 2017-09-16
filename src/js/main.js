@@ -1,6 +1,7 @@
 const $ = require("jquery"),
   blogs = require("./blogs"),
-  troll = require("./troll");
+  troll = require("./troll"),
+  subscribe = require("./subscribe");
 
 $(document).ready(function () {
   blogs.loadCurrentBlog();
@@ -8,4 +9,6 @@ $(document).ready(function () {
   blogs.registerBlogListListeners();
 
   troll.registerTrollListeners();
+
+  subscribe.registerForm();
 });
