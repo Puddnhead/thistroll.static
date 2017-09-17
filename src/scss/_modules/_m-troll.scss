@@ -7,8 +7,8 @@
   margin-right: auto;
   padding-top: 30px;
   padding-bottom: 30px;
-  width: 18%;
-  max-width: 250px;
+  width: $rightDivWidth;
+  max-width: $rightDivMaxWidth;
 
   background-color: $mustard;
 }
@@ -21,7 +21,6 @@
 
 .trollTextarea {
   display: inline-block;
-  max-width: 100%;
-  width: 200px;
+  width: 90%;
   height: 200px;
 }

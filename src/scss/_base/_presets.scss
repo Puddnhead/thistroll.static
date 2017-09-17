@@ -1,3 +1,13 @@
+a {
+  color: $boringLink;
+  text-decoration: none;
+}
+
+a:visited {
+  color: $boringLink;
+  text-decoration: none;
+}
+
 body {
   margin: 0px;
   padding: 0px;

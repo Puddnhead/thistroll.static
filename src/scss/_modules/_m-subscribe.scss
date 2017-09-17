@@ -11,8 +11,8 @@ $subscribePadding: 10px;
   margin-left: $standardMargin;
   margin-right: auto;
   padding-bottom: $standardMargin;
-  width: 18%;
-  max-width: 250px;
+  width: $rightDivWidth;
+  max-width: $rightDivMaxWidth;
 
   background-color: $blogGrey;
 }
@@ -82,13 +82,4 @@ $subscribePadding: 10px;
   color: $trollRed;
   text-align: left;
   font-size: .75em;
-}
-
-.cancelLink {
-  color: $boringLink;
-  text-decoration: none;
-}
-
-.cancelLink:visited {
-  color: $boringLink;
 }

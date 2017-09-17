@@ -5,7 +5,7 @@
   margin-left: auto;
   margin-right: $standardMargin;
   width: 14%;
-  max-width: 225px;
+  max-width: 250px;
 
   background-color: $mustard;
 
@@ -17,22 +17,22 @@
   list-style-type: none;
 
   li {
-    padding-top: 5px;
-    padding-bottom: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 
     a {
       color: $darkRed;
-      font-size: 1.2em;
       font-weight: bold;
-      //text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-      //letter-spacing: 1px;
-      text-decoration-line: none;
     }
 
     a:hover {
       text-transform: uppercase;
     }
   }
+}
+
+.blogListTitle {
+  padding: 0;
 }
 
 .blogListLocation {
