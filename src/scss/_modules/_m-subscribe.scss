@@ -43,11 +43,11 @@ $subscribePadding: 10px;
 }
 
 .subscribeInput.parsley-error {
-  background-color: $errorPink;
+  background-color: $validationErrorPink;
 }
 
 .subscribeInput.parsley-success {
-  background-color: $successGreen;
+  background-color: $validationSuccessGreen;
 }
 
 .subscribeButton {

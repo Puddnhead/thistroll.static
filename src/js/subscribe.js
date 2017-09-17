@@ -97,7 +97,7 @@ module.exports = {
       previous.animate(upAnimationProps, 1, "swing", function () {
           // animate next div off the page
           next.animate(downAnimationProps, 1, "swing", function () {
-            // make next div visible and animate it back onto successGreen
+            // make next div visible and animate it back onto validationSuccessGreen
             next.css("visibility", "visible")
               .animate(upAnimationProps, animationDuration);
           });

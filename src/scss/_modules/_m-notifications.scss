@@ -5,7 +5,7 @@
   padding: 10px;
 
   display: none;
-  
+
   color: black;
   text-align: center;
 }
@@ -17,5 +17,5 @@
 
 .notificationsBar.error {
   visibility: visible;;
-  background-color: $errorPink;
+  background-color: $errorRed;
 }

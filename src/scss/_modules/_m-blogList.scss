@@ -22,8 +22,10 @@
 
     a {
       color: $trollRed;
-      text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-      letter-spacing: 1px;
+      font-size: 1.2em;
+      font-weight: bold;
+      //text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+      //letter-spacing: 1px;
       text-decoration-line: none;
     }
 
@@ -40,7 +42,8 @@
 
 .blogListLocation {
   margin: 0;
-  color: black;
+  color: $mediumGrey;
+  font-weight: 1000;
   font-size: .75em;
   padding: 0;
 }
