@@ -16,6 +16,7 @@
     "guard-for-in": 2,
     "max-depth": 1,
     "no-alert": 2,
+    "no-console": 1,
     "no-debugger": 1,
     "no-empty-function": 2,
     "no-eq-null": 2,

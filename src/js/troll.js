@@ -6,26 +6,26 @@ let clearTextareaNextAction = true;
 module.exports = {
 
   registerTrollListeners: function () {
-    const textBox = document.getElementById("trollTextarea"),
+    const textBox = $("#trollTextarea"),
       endpoint = properties.serverHost + "/troll";
 
-    textBox.addEventListener("focus", function () {
+    textBox.focus(function () {
       if (clearTextareaNextAction) {
-        textBox.value = "";
+        textBox.val("");
         clearTextareaNextAction = false;
       }
     });
 
-    textBox.addEventListener("keypress", function (event) {
+    textBox.keydown(function (event) {
       let messageForTroll;
 
       if (clearTextareaNextAction) {
         clearTextareaNextAction = false;
-        textBox.value = "";
-      } else if (event.charCode === 13) {
-        messageForTroll = textBox.value;
-        textBox.value = "...";
-        textBox.disabled = true;
+        textBox.val("");
+      } else if (event.keyCode === 13) {
+        messageForTroll = textBox.val();
+        textBox.val("...");
+        textBox.attr("disabled", true);
         $.ajax({
             type: "POST",
             url: endpoint,
@@ -33,8 +33,8 @@ module.exports = {
             contentType: "text/plain",
             success: function (answer) {
               clearTextareaNextAction = true;
-              textBox.value = answer;
-              textBox.disabled = false;
+              textBox.val(answer);
+              textBox.attr("disabled", false);
             }
         });
       }
