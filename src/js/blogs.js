@@ -74,7 +74,7 @@ module.exports = {
         slick($(carousel), {
           slidesToShow: 1,
           slidesToScroll: 1,
-          lazyLoad: false,
+          lazyLoad: true,
           centerMode: true,
           dots: true,
           speed: 500,
