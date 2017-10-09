@@ -1,10 +1,12 @@
 const $ = require("jquery"),
+  queryString = require("query-string"),
   blogs = require("./blogs"),
   troll = require("./troll"),
   subscribe = require("./subscribe");
 
 $(document).ready(function () {
-  blogs.loadCurrentBlog();
+  const blogId = queryString.parse(location.search).blog;
+  blogs.loadBlog(blogId);
   blogs.loadNextBlogListPage();
   blogs.registerBlogListListeners();
 

@@ -1,5 +1,4 @@
 const $ =       require("jquery"),
-  queryString = require("query-string"),
   moment =      require("moment"),
   slick =       require("slick-carousel-browserify"),
   properties =  require("./properties"),
@@ -8,12 +7,11 @@ const $ =       require("jquery"),
 module.exports = {
   blogListPage: 0,
 
-  loadCurrentBlog: function () {
+  loadBlog: function (blogId) {
     const blogTitleH1 = document.getElementById("blogTitle"),
       blogLocationH2 = document.getElementById("blogLocation"),
       blogDateH2 = document.getElementById("blogDate"),
       blogTextDiv = document.getElementById("blogText"),
-      blogId = queryString.parse(location.search).blog,
       endpoint = blogId ? properties.serverHost + "/blog/" + blogId : properties.serverHost + "/blog/current";
 
     $.get(endpoint, function (blog) {
@@ -27,51 +25,61 @@ module.exports = {
 
   loadNextBlogListPage: function () {
     const endpoint = properties.serverHost + "/blog/page?pageNumber=" + this.blogListPage,
-      blogList = document.getElementById("blogList"),
-      seeMoreLink = document.getElementById("seeMoreLink");
+      blogList = $("#blogList"),
+      seeMoreLink = $("#seeMoreLink");
     let index, blogCount, listItem, blogs;
 
     $.get(endpoint, function (response) {
       blogs = response.blogs;
       for (index = 0, blogCount = blogs.length; index < blogCount; index++) {
-        listItem = "<li><p class='blogListTitle'><a href='index.html?blog=" +
-          blogs[index].id + "'>" + blogs[index].title + "</a></p>";
+        listItem = $("<li></li>");
+        listItem.append($("<p class='blogListTitle'><a href='#'>" + blogs[index].title + "</a></p>"));
         if (blogs[index].location) {
-          listItem += "<p class='blogListLocation'>" + blogs[index].location + "</p>";
+          listItem.append($( "<p class='blogListLocation'>" + blogs[index].location + "</p>"));
         }
-        listItem += "</li>";
-        blogList.innerHTML += listItem;
+
+        listItem.click(this.generateLoadBlogFunction(blogs[index].id));
+        blogList.append(listItem);
       }
       if (!response.lastPage) {
-        seeMoreLink.style.display = "inline";
+        seeMoreLink.css("display", "inline");
       } else {
-        seeMoreLink.style.display = "none";
+        seeMoreLink.css("display", "none");
       }
-    });
+    }.bind(this));
     this.blogListPage++;
   },
 
   loadBlogImages: function (blogId) {
     const endpoint = properties.serverHost + "/blog/" + blogId + "/images",
-      carousel = document.getElementById("carousel");
+      carouselContainer = $("#carouselContainer");
 
-    let index, imageCount;
+    let carousel = $("#carousel"),
+      index, imageCount;
+
+    if (carousel) {
+      carousel.slick("unslick").slick("reinit");
+      carousel.remove();
+    }
 
     $.get(endpoint, function (imageUrls) {
       if (imageUrls && imageUrls.length) {
-        $(carousel).css("display", "block");
+        carousel = $("<div id='carousel' class='carousel'></div>");
+        carousel.css("display", "block");
+        carouselContainer.append(carousel);
 
         for (index = 0, imageCount = imageUrls.length; index < imageCount; index++) {
-          carousel.innerHTML += "<div class='slide'>"
+          carousel.append($("<div class='slide'>"
             + "<a class='lightboxTrigger' href='" + imageUrls[index] + "'>"
-            + "<img class='slideImage' src='" + imageUrls[index] + "' /></a></div>";
+            + "<img class='slideImage' src='" + imageUrls[index] + "' /></a></div>"
+          ));
         }
 
         if (imageCount % 2 === 0) {
-          carousel.innerHTML += "<div class='slide'><img class='slideImage' src='resources/images/thistroll.png' /></div>";
+          carousel.append($("<div class='slide'><img class='slideImage' src='resources/images/thistroll.png' /></div>"));
         }
 
-        slick($(carousel), {
+        slick(carousel, {
           slidesToShow: 1,
           slidesToScroll: 1,
           lazyLoad: true,
@@ -90,5 +98,11 @@ module.exports = {
   registerBlogListListeners: function() {
     const seeMoreLink = document.getElementById("seeMoreLink");
     seeMoreLink.addEventListener("click", this.loadNextBlogListPage.bind(this));
-  }
+  },
+
+  generateLoadBlogFunction: function(blogId) {
+    return function () {
+      this.loadBlog(blogId);
+    }.bind(this);
+  },
 };
