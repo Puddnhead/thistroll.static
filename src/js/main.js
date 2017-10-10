@@ -5,7 +5,7 @@ const $ = require("jquery"),
   subscribe = require("./subscribe");
 
 $(document).ready(function () {
-  const blogId = queryString.parse(location.search).blog;
+  const blogId = queryString.parse(location.search).blogId;
   blogs.loadBlog(blogId);
   blogs.loadNextBlogListPage();
   blogs.registerBlogListListeners();

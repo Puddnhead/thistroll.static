@@ -73,6 +73,7 @@ gulp.task('build-css', function() {
 
 gulp.task('copyHtml', function() {
   gulp.src('src/*.html').pipe(gulp.dest('target'));
+  gulp.src('src/*.xml').pipe(gulp.dest('target'));
 });
 
 gulp.task('copyResources', function() {
