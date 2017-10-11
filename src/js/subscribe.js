@@ -16,8 +16,7 @@ module.exports = {
 
   registerForm: function () {
     $("#headerSubscribeBtn").click(function () {
-      $("#headerSubscribeBtn").hide();
-      this._slideSwitchDivs($("#trollDiv"), $("#subscribeDiv"));
+      this._slideSwitchDivs($("#trollDiv"), $("#subscribeDiv"), this._animateHeaderSubscribeBtn.bind(this));
     }.bind(this));
 
     $("#subscribeForm").parsley().on("field:validated", function() {
@@ -61,9 +60,10 @@ module.exports = {
   },
 
   _handleCancel: function () {
-    $("#headerSubscribeBtn").show();
-    this._slideSwitchDivs($("#subscribeDiv"), $("#trollDiv"));
-    this._resetForm();
+    this._animateSubscribeButton(false, function () {
+      this._slideSwitchDivs($("#subscribeDiv"), $("#trollDiv"));
+      this._resetForm();
+    }.bind(this));
   },
 
   _handleUserRegistrationError: function (data) {
@@ -87,7 +87,7 @@ module.exports = {
     $(".subscribeInput").removeClass("parsley-error");
   },
 
-  _slideSwitchDivs: function (previous, next) {
+  _slideSwitchDivs: function (previous, next, callback) {
     // animate previous div down and off
     previous.animate(downAnimationProps, animationDuration, "swing", function () {
       // hide previous div and animate it back to its original position
@@ -99,9 +99,50 @@ module.exports = {
           next.animate(downAnimationProps, 1, "swing", function () {
             // make next div visible and animate it back onto validationSuccessGreen
             next.css("visibility", "visible")
-              .animate(upAnimationProps, animationDuration);
+              .animate(upAnimationProps, animationDuration, "swing", callback);
           });
         });
+    });
+  },
+
+  _animateHeaderSubscribeBtn: function () {
+    this._animateSubscribeButton(true);
+  },
+
+  _animateSubscribeButton: function (headerToDiv, callback) {
+    const headerSubscribeBtn = $("#headerSubscribeBtn"),
+      divSubscribeBtn = $("#subscribeButton"),
+      headerBtnOffset = headerSubscribeBtn.offset(),
+      divSubscribeOffset = divSubscribeBtn.offset(),
+      marginTop = parseInt(divSubscribeBtn.css("margin-top").split("px")[0]);
+    let animateButton, style, topChange, leftChange, btnToHide, btnToShow;
+
+    if (headerToDiv) {
+      style ="position: absolute; top: " + headerBtnOffset.top + "; left: " + headerBtnOffset.left + ";";
+      btnToHide = headerSubscribeBtn;
+      btnToShow = divSubscribeBtn;
+      topChange = "+=" + (divSubscribeOffset.top - headerBtnOffset.top - marginTop);
+      leftChange = "-=" + (headerBtnOffset.left - divSubscribeOffset.left);
+    } else {
+      style ="position: absolute; top: " + (divSubscribeOffset.top - marginTop) + "; left: " + divSubscribeOffset.left + ";";
+      btnToHide = divSubscribeBtn;
+      btnToShow = headerSubscribeBtn;
+      topChange = "-=" + (divSubscribeOffset.top - headerBtnOffset.top);
+      leftChange = "+=" + (headerBtnOffset.left - divSubscribeOffset.left);
+    }
+    animateButton = $("<input type='button' class='subscribeButton' value='SUBSCRIBE' " +
+      "style=\"" + style + "\"/>");
+    $("body").append(animateButton);
+    btnToHide.css("opacity", 0);
+    animateButton.animate({
+      "top": topChange,
+      "left": leftChange
+    }, 500, "swing", function () {
+      btnToShow.css("opacity", 1);
+      animateButton.remove();
+      if (callback) {
+        callback();
+      }
     });
   }
 }
