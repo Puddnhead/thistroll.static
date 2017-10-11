@@ -17,9 +17,10 @@ const gulp = require('gulp'),
   rename     = require('gulp-rename'),
   source     = require('vinyl-source-stream'),
   sourceMaps = require('gulp-sourcemaps'),
+  vinylMap   = require('vinyl-map'),
   watchify   = require('watchify');
 
-let env = 'DEV',
+let env = 'PROD',
   config = {
     js: {
         src: './src/js/main.js',       // Entry point
@@ -34,8 +35,8 @@ gulp.task('default', function () {
   runBuild();
 });
 
-gulp.task('prod', function () {
-  env = 'PROD';
+gulp.task('dev', function () {
+  env = 'DEV';
   runBuild();
 });
 
@@ -109,4 +110,12 @@ gulp.task('bundle', function () {
     } else {
       bundle(bundler, true);
     }
+});
+
+gulp.task('devProperties', function () {
+  gulp.src("./target/js/bundle.js", {"base": "./target/js"})
+      .pipe(vinylMap((contents, filename) => {
+        return contents.toString().replace("https://app.thistroll.com", "http://localhost:8081");
+      }))
+      .pipe(gulp.dest("./target/js"));
 });
