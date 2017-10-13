@@ -117,6 +117,8 @@ module.exports = {
       margin = parseInt(divSubscribeBtn.css("margin-top").split("px")[0]);
     let animateButton, style, topChange, leftChange, btnToHide, btnToShow;
 
+    headerSubscribeBtn.mouseout();
+    divSubscribeBtn.mouseout();
     if (headerToDiv) {
       style ="position: absolute; top: " + headerBtnOffset.top + "; left: " + headerBtnOffset.left + ";";
       btnToHide = headerSubscribeBtn;
