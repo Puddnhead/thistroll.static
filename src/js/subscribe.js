@@ -114,17 +114,18 @@ module.exports = {
       divSubscribeBtn = $("#subscribeButton"),
       headerBtnOffset = headerSubscribeBtn.offset(),
       divSubscribeOffset = divSubscribeBtn.offset(),
-      marginTop = parseInt(divSubscribeBtn.css("margin-top").split("px")[0]);
+      margin = parseInt(divSubscribeBtn.css("margin-top").split("px")[0]);
     let animateButton, style, topChange, leftChange, btnToHide, btnToShow;
 
     if (headerToDiv) {
       style ="position: absolute; top: " + headerBtnOffset.top + "; left: " + headerBtnOffset.left + ";";
       btnToHide = headerSubscribeBtn;
       btnToShow = divSubscribeBtn;
-      topChange = "+=" + (divSubscribeOffset.top - headerBtnOffset.top - marginTop);
-      leftChange = "-=" + (headerBtnOffset.left - divSubscribeOffset.left);
+      topChange = "+=" + (divSubscribeOffset.top - headerBtnOffset.top - margin);
+      leftChange = "-=" + (headerBtnOffset.left - divSubscribeOffset.left + margin);
     } else {
-      style ="position: absolute; top: " + (divSubscribeOffset.top - marginTop) + "; left: " + divSubscribeOffset.left + ";";
+      style ="position: absolute; top: " + (divSubscribeOffset.top - margin) +
+        "; left: " + (divSubscribeOffset.left - margin) + ";";
       btnToHide = divSubscribeBtn;
       btnToShow = headerSubscribeBtn;
       topChange = "-=" + (divSubscribeOffset.top - headerBtnOffset.top);
