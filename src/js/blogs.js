@@ -15,6 +15,10 @@ module.exports = {
       endpoint = blogId ? properties.serverHost + "/blog/" + blogId : properties.serverHost + "/blog/current";
 
     $.get(endpoint, function (blog) {
+      const blogTextLoadingIndicator = $("#blogTextLoadingIndicator");
+      if (blogTextLoadingIndicator) {
+        blogTextLoadingIndicator.remove();
+      }
       this.loadBlogImages(blog.id);
       blogTitleH1.innerHTML = blog.title;
       blogLocationH2.innerHTML = blog.location ? blog.location : "";
@@ -30,6 +34,10 @@ module.exports = {
     let index, blogCount, listItem, blogs;
 
     $.get(endpoint, function (response) {
+      const blogListLoadingIndicator = $("#blogListLoadingIndicator");
+      if (blogListLoadingIndicator) {
+        blogListLoadingIndicator.remove();
+      }
       blogs = response.blogs;
       for (index = 0, blogCount = blogs.length; index < blogCount; index++) {
         listItem = $("<li></li>");

@@ -39,6 +39,7 @@ window.location="https://www.thistroll.com/unsupportedBrowser.html";
 	<div id="main">
     <div class="notificationsBar" id="notificationsBar"></div>
 		<div class="blogNavDiv" id="blogNavDiv">
+      <img class="loadingIndicator" id="blogListLoadingIndicator" src="resources/images/loading.gif" />
 			<ul id="blogList" class="blogList"></ul>
       <p><a id="seeMoreLink" class="seeMoreLink" href="#">Older Blogs</a></p>
 		</div>
@@ -47,7 +48,9 @@ window.location="https://www.thistroll.com/unsupportedBrowser.html";
 			<h1 id="blogTitle"></h1>
       <h2 id="blogLocation" class="blogLocation"></h2>
         <div id="carouselContainer"></div>
-      <div id="blogText" class="blogText">Loading...</div>
+      <div id="blogText" class="blogText">
+        <img class="loadingIndicator" id="blogTextLoadingIndicator" src="resources/images/loading.gif" />
+      </div>
 		</div>
 		<div class="trollDiv" id="trollDiv">
 			<div class="centerDiv">
