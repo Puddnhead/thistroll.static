@@ -3,7 +3,8 @@ const $ =       require("jquery"),
   login =       require("./login");
 
 let clearTextareaNextAction = true,
-  currentSpeech;
+  currentSpeech,
+  loginText;
 
 module.exports = {
 
@@ -15,6 +16,18 @@ module.exports = {
       if (clearTextareaNextAction) {
         textBox.val("");
         clearTextareaNextAction = false;
+      }
+    });
+
+    textBox.keypress(function (event) {
+      if (textBox.val().substring(0, 6) === "login ") {
+        if (!loginText) {
+          loginText = textBox.val();
+        }
+        loginText += String.fromCharCode(event.which);
+        textBox.val("login " + "*".repeat(loginText.length - 6));
+      } else {
+        loginText = null;
       }
     });
 
@@ -37,7 +50,7 @@ module.exports = {
             this.switchToAnswerMode();
             break;
           case "login":
-            login.login();
+            login.login(loginText);
             clearTextareaNextAction = true;
             break;
           default:

@@ -4,14 +4,14 @@ const $ =       require("jquery"),
 
 module.exports = {
 
-    login: function () {
+    login: function (loginText) {
       const textBox = $("#trollTextarea"),
         loginEndpoint = properties.serverHost + "/session/login";
       let username, password;
 
       try {
-        username = textBox.val().split(" ")[1],
-        password = textBox.val().split(" ")[2];
+        username = loginText.split(" ")[1],
+        password = loginText.split(" ")[2];
         textBox.attr("disabled", true);
         textBox.val("...");
         $.ajax({
