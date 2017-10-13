@@ -79,7 +79,7 @@ module.exports = {
         for (index = 0, imageCount = imageUrls.length; index < imageCount; index++) {
           carousel.append($("<div class='slide'>"
             + "<a class='lightboxTrigger' href='" + imageUrls[index] + "'>"
-            + "<img class='slideImage' src='" + imageUrls[index] + "' /></a></div>"
+            + "<img class='slideImage' data-lazy='" + imageUrls[index] + "' /></a></div>"
           ));
         }
 
@@ -90,7 +90,7 @@ module.exports = {
         slick(carousel, {
           slidesToShow: 1,
           slidesToScroll: 1,
-          lazyLoad: true,
+          lazyLoad: "ondemand",
           centerMode: true,
           dots: true,
           speed: 500,
