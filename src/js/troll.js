@@ -26,6 +26,7 @@ module.exports = {
         }
         loginText += String.fromCharCode(event.which);
         textBox.val("login " + "*".repeat(loginText.length - 6));
+        event.preventDefault();
       } else {
         loginText = null;
       }
