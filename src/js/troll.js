@@ -20,12 +20,17 @@ module.exports = {
     });
 
     textBox.keypress(function (event) {
+      let maskedText = "login ", index;
+
       if (textBox.val().substring(0, 6) === "login ") {
         if (!loginText) {
           loginText = textBox.val();
         }
         loginText += String.fromCharCode(event.which);
-        textBox.val("login " + "*".repeat(loginText.length - 6));
+        for (index = 0; index < loginText.length - 6; index++) {
+          maskedText += "*";
+        }
+        textBox.val(maskedText);
         event.preventDefault();
       } else {
         loginText = null;
