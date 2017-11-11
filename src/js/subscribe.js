@@ -30,8 +30,6 @@ module.exports = {
             "username": $("#usernameInput").val(),
             "email": $("#emailInput").val(),
             "password": $("#passwordInput").val(),
-            "firstName": $("#firstNameInput").val(),
-            "lastName": $("#lastNameInput").val(),
             "notificationsEnabled": true
           },
           settings = {
