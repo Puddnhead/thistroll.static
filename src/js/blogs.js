@@ -59,18 +59,18 @@ module.exports = {
   },
 
   loadBlogImages: function (blogId) {
-    const endpoint = properties.serverHost + "/blog/" + blogId + "/images",
-      carouselContainer = $("#carouselContainer");
-
-    let carousel = $("#carousel"),
-      index, imageCount;
-
-    if (carousel) {
-      carousel.slick("unslick").slick("reinit");
-      carousel.remove();
-    }
+    const endpoint = properties.serverHost + "/blog/" + blogId + "/images";
 
     $.get(endpoint, function (imageUrls) {
+      const carouselContainer = $("#carouselContainer");
+      let carousel = $("#carousel"),
+        index, imageCount;
+
+      if (carousel) {
+        carousel.slick("unslick").slick("reinit");
+        carousel.remove();
+      }
+
       if (imageUrls && imageUrls.length) {
         carousel = $("<div id='carousel' class='carousel'></div>");
         carousel.css("display", "block");
