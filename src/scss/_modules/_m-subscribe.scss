@@ -51,10 +51,10 @@ $subscribePadding: 10px;
 }
 
 .subscribeButton {
-  margin-top: auto;
+  margin-top: $standardMargin;
   margin-left: $standardMargin;
   margin-right: $standardMargin;
-  margin-bottom: auto;
+  margin-bottom: 0;
   padding-top: 0;
   padding-bottom: 0;
   padding-left: 50px;
