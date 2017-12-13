@@ -1,5 +1,6 @@
 const properties =  require("./properties"),
-  notify =          require("./notify");
+  notify =          require("./notify"),
+  login =           require("./login");
 let $ = window.jQuery = require("jquery");
 require("parsleyjs");
 
@@ -76,8 +77,10 @@ module.exports = {
   },
 
   _handleUserRegistrationSuccess: function (data) {
+    const password = $("#passwordInput").val();
     this._handleCancel();
-    notify.success("Successfully registered user " + data.username + " with email " + data.email);
+
+    login.login(data.username, password);
   },
 
   _resetForm: function () {

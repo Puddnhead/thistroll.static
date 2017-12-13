@@ -1,8 +1,8 @@
 const $ =       require("jquery"),
   vex =         require("vex-js"),
-  _ =           require("lodash"),
   properties =  require("./properties"),
-  notify =      require("./notify");
+  notify =      require("./notify"),
+  sessionModel =     require("./sessionModel");
 
 vex.registerPlugin(require("vex-dialog"))
 vex.defaultOptions.className = "vex-theme-top";
@@ -13,7 +13,7 @@ module.exports = {
   registerLoginListeners: function () {
     const loginLink = $("#loginLink");
 
-    if (this.isLoggedIn()) {
+    if (sessionModel.isLoggedIn()) {
       this.setLogoutText();
     }
     loginLink.click(function (e) {
@@ -23,7 +23,7 @@ module.exports = {
   },
 
   loginDialog: function () {
-    if (this.isLoggedIn()) {
+    if (sessionModel.isLoggedIn()) {
       this.logout();
     } else {
       vex.dialog.open({
@@ -53,8 +53,7 @@ module.exports = {
         }),
         contentType: "application/json",
         success: function (session) {
-          // omit the expiration time because the client doesn't care and we don't want to update it
-          document.session=_.omit(session, "expirationTime");
+          sessionModel.setSession(session);
           notify.success("Successfully logged in");
           this.setLogoutText();
         }.bind(this),
@@ -81,28 +80,12 @@ module.exports = {
           withCredentials: true
         },
     });
-    delete document.session;
+    sessionModel.clearSession();
     this.setLoginText();
   },
 
-  isLoggedIn: function () {
-    if (document.session) {
-      return document.session.id;
-    }
-
-    return false;
-  },
-
-  getLoggedInUsername: function () {
-    if (document.session) {
-      return document.session.userDetails.username;
-    }
-
-    return "";
-  },
-
   setLogoutText: function () {
-    $("#loginLink").text("Logout " + this.getLoggedInUsername());
+    $("#loginLink").text("Logout " + sessionModel.getLoggedInUsername());
   },
 
   setLoginText: function () {
