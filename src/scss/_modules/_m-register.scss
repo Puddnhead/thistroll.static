@@ -1,0 +1,129 @@
+$registerPadding: 10px;
+
+.registerDiv {
+  @include baseModule
+
+  display: inline-block;
+  display: none;
+
+  margin-top: $standardMargin;
+  margin-bottom: $standardMargin;
+  margin-left: $standardMargin;
+  margin-right: auto;
+  padding-bottom: 0;
+  width: $rightDivWidth;
+  max-width: $rightDivMaxWidth;
+
+  background-color: $blogGrey;
+}
+
+.registerInput {
+  margin-top: $registerPadding;
+  margin-left: $registerPadding;
+  margin-right: $registerPadding;
+  padding: $registerPadding;
+  width: 90%;
+
+  background-color: $blogGrey;
+  border: 1px solid black;
+
+  font-size: 1em;
+  color: black;
+}
+
+.registerInput.parsley-error {
+  background-color: $validationErrorPink;
+}
+
+.registerInput.parsley-success {
+  background-color: $validationSuccessGreen;
+}
+
+.registerButton {
+  margin-top: $standardMargin;
+  margin-left: $standardMargin;
+  margin-right: $standardMargin;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 50px;
+  padding-right: 50px;
+
+  height: 30px;
+  border-radius: 4px;
+  border: 2px solid black;
+  background-color: $trollRed;
+
+  font-size: 1em;
+
+  -webkit-appearance: none;
+}
+
+.registerButton:hover {
+  border: 2px solid $blogGrey;
+  background-color: black;
+  color: $trollRed;
+}
+
+.registerLoginDiv {
+  float: right;
+  margin: 0;
+
+  text-align: center;
+}
+
+.subscribeLabel {
+  margin: 0;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.subscribeWrapper {
+  display: inline;
+
+  margin: $registerPadding;
+  padding: $registerPadding;
+
+  text-align: left;
+}
+
+/* From cssdeck.com */
+.registerCheckbox {
+	width: 28px;
+	height: 28px;
+	background: #fcfff4;
+
+  margin-top: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 0;
+
+	background: -webkit-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	background: -moz-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	background: -o-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	background: -ms-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	background: linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfff4', endColorstr='#b3bead',GradientType=0 );
+
+  border-color: black;
+
+	position: relative;
+}
+
+.bannerButton {
+  margin: 6px;
+}
+
+.loginLink {
+  margin-top: 0;
+  font-size: .75em;
+}
+
+.parsley-errors-list {
+  margin-bottom: 0;
+
+  list-style: none;
+  color: $trollRed;
+  text-align: left;
+  font-size: .75em;
+}

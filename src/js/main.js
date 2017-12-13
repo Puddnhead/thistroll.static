@@ -2,7 +2,7 @@ const $ = require("jquery"),
   queryString = require("query-string"),
   blogs = require("./blogs"),
   troll = require("./troll"),
-  subscribe = require("./subscribe"),
+  register = require("./register"),
   login = require("./login");
 
 $(document).ready(function () {
@@ -14,5 +14,5 @@ $(document).ready(function () {
   troll.registerTrollListeners();
   login.registerLoginListeners();
 
-  subscribe.registerForm();
+  register.registerForm();
 });

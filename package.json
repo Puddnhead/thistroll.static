@@ -35,6 +35,7 @@
   },
   "dependencies": {
     "jquery": "^3.2.1",
+    "lodash": "^4.17.4",
     "luminous-lightbox": "^1.0.1",
     "moment": "^2.18.1",
     "parsleyjs": "^2.8.0",

@@ -32,8 +32,8 @@ window.location="https://www.thistroll.com/unsupportedBrowser.html";
 <body>
 	<div id="header">
 		<img class="banner" src="resources/images/thistroll_banner.jpg" />
-    <div class="subscribeLoginDiv">
-      <input type="button" class="bannerButton subscribeButton" id="headerSubscribeBtn" value="SUBSCRIBE" />
+    <div class="registerLoginDiv">
+      <input type="button" class="bannerButton registerButton" id="headerRegisterBtn" value="REGISTER" />
       <br/><a class="loginLink" id="loginLink" href="#">Login</a>
     </div>
 	</div>
@@ -61,23 +61,26 @@ window.location="https://www.thistroll.com/unsupportedBrowser.html";
 			<textarea id="trollTextarea" class="trollTextarea">Blurg. What?
       </textarea>
 		</div>
-    <div class="subscribeDiv" id="subscribeDiv">
-      <h3>Subscribe</h3>
-      <p class="subscriptionInstructions">Submit this form if you would like to receive emails when new blogs appear on the site.</p>
-      <form id="subscribeForm" data-parsley-validate="">
-        <input class="subscribeInput" type="text" id="usernameInput" placeholder="Username"
+    <div class="registerDiv" id="registerDiv">
+      <h3>Register</h3>
+      <form id="registerForm" data-parsley-validate="">
+        <input class="registerInput" type="text" id="usernameInput" placeholder="Username"
             minlength="3" maxlength="20" data-parsley-pattern="\w+" data-parsley-pattern-message="Please use only alphanumeric characters in your username" required="" />
-        <input class="subscribeInput" type="email" id="emailInput" placeholder="Email"
+        <input class="registerInput" type="email" id="emailInput" placeholder="Email"
             maxlength="200" required="" />
-        <input class="subscribeInput" type="password" id="passwordInput" placeholder="Password"
+        <input class="registerInput" type="password" id="passwordInput" placeholder="Password"
             minlength="6" maxlength="100" required="" />
-        <input class="subscribeInput" type="password" id="verifyPasswordInput" placeholder="Repeat Password"
+        <input class="registerInput" type="password" id="verifyPasswordInput" placeholder="Repeat Password"
             minlength="6" maxlength="100" data-parsley-equalto="#passwordInput" required="" />
-        <input class="subscribeInput" type="text" id="firstNameInput" placeholder="First Name"
+        <input class="registerInput" type="text" id="firstNameInput" placeholder="First Name"
             maxlength="100" />
-        <input class="subscribeInput" type="text" id="lastNameInput" placeholder="Last Name"
+        <input class="registerInput" type="text" id="lastNameInput" placeholder="Last Name"
             maxlength="100" />
-        <input type="submit" class="subscribeButton" id="subscribeButton" value="SUBSCRIBE" style="opacity: 0" />
+        <div class="subscribeWrapper">
+          <p class="subscribeLabel">I would like to receive emails when new blogs appear this site</p>
+          <input class="registerCheckbox" type="checkbox" checked="checked" id="subscribeToUpdates" />
+        </div>
+        <input type="submit" class="registerButton" id="registerButton" value="REGISTER" style="opacity: 0" />
         <p><a class="cancelLink" id="cancelLink" href="#">Cancel</a></p>
       </form>
     </div>
