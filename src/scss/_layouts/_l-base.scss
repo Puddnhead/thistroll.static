@@ -1,10 +1,12 @@
+$headerHeight: 60px;
+
 #header {
   background-color: $mustard;
   margin: 0px;
 
   .banner {
       margin: 0px;
-      height: 50px;
+      height: $headerHeight;
   }
 }
 

@@ -2,7 +2,8 @@ const $ = require("jquery"),
   queryString = require("query-string"),
   blogs = require("./blogs"),
   troll = require("./troll"),
-  subscribe = require("./subscribe");
+  subscribe = require("./subscribe"),
+  login = require("./login");
 
 $(document).ready(function () {
   const blogId = queryString.parse(location.search).blogId;
@@ -11,6 +12,7 @@ $(document).ready(function () {
   blogs.registerBlogListListeners();
 
   troll.registerTrollListeners();
+  login.registerLoginListeners();
 
   subscribe.registerForm();
 });

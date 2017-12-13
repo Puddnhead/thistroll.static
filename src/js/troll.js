@@ -1,10 +1,8 @@
 const $ =       require("jquery"),
-  properties =  require("./properties"),
-  login =       require("./login");
+  properties =  require("./properties");
 
 let clearTextareaNextAction = true,
-  currentSpeech,
-  loginText;
+  currentSpeech;
 
 module.exports = {
 
@@ -16,24 +14,6 @@ module.exports = {
       if (clearTextareaNextAction) {
         textBox.val("");
         clearTextareaNextAction = false;
-      }
-    });
-
-    textBox.keypress(function (event) {
-      let maskedText = "login ", index;
-
-      if (textBox.val().substring(0, 6) === "login ") {
-        if (!loginText) {
-          loginText = textBox.val();
-        }
-        loginText += String.fromCharCode(event.which);
-        for (index = 0; index < loginText.length - 6; index++) {
-          maskedText += "*";
-        }
-        textBox.val(maskedText);
-        event.preventDefault();
-      } else {
-        loginText = null;
       }
     });
 
@@ -54,10 +34,6 @@ module.exports = {
             break;
           case "answermode":
             this.switchToAnswerMode();
-            break;
-          case "login":
-            login.login(loginText);
-            clearTextareaNextAction = true;
             break;
           default:
             submitFunction ? submitFunction() : this.normalSpeechSubmit();

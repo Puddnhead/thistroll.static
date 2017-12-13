@@ -1,51 +1,58 @@
 const $ =       require("jquery"),
+  vex =         require("vex-js"),
   properties =  require("./properties"),
   notify =      require("./notify");
 
+vex.registerPlugin(require("vex-dialog"))
+vex.defaultOptions.className = "vex-theme-top";
+vex.defaultO
+
 module.exports = {
 
-    login: function (loginText) {
-      const textBox = $("#trollTextarea"),
-        loginEndpoint = properties.serverHost + "/session/login";
-      let username, password;
+  registerLoginListeners: function () {
+    const loginLink = $("#loginLink");
+    loginLink.click(function (e) {
+      e.preventDefault();
+      this.loginDialog();
+    }.bind(this));
+  },
 
-      try {
-        username = loginText.split(" ")[1],
-        password = loginText.split(" ")[2];
-        textBox.attr("disabled", true);
-        textBox.val("...");
-        $.ajax({
-            type: "POST",
-            url: loginEndpoint,
-            data: JSON.stringify({
-              username: username,
-              password: password
-            }),
-            contentType: "application/json",
-            success: function () {
-              notify.success("Successfully logged in");
-              textBox.val("Proceed");
-              textBox.attr("disabled", false);
-            },
-            error: this._handleLoginError,
-            xhrFields: {
-              withCredentials: true
-            },
-        });
-      } catch(err) {
-        this._handleLoginError(err);
-      }
-    },
+  loginDialog: function () {
+    vex.dialog.open({
+      message: "Login",
+      input: [
+        "<input name='username' type='text' placeholder='Username'/>",
+        "<input name='password' type='password' placeholder='Password' />"
+      ].join(""),
+      callback: function (data) {
+        if (data) {
+          this.login(data.username, data.password);
+        }
+      }.bind(this)
+    });
+    return false;
+  },
 
-    _handleLoginError: function (err) {
-      const textBox = $("#trollTextarea");
+  login: function (username, password) {
+    const loginEndpoint = properties.serverHost + "/session/login";
 
-      notify.error("Error logging in.");
-      if (err && err.responseJSON && err.responseJSON.message) {
-        textBox.val(err.responseJSON.message);
-      } else {
-        textBox.val("");
-      }
-      textBox.attr("disabled", false);
-    }
+    $.ajax({
+        type: "POST",
+        url: loginEndpoint,
+        data: JSON.stringify({
+          username: username,
+          password: password
+        }),
+        contentType: "application/json",
+        success: function () {
+          notify.success("Successfully logged in");
+        },
+        error: function () {
+          notify.error("Error logging in.");
+        },
+        xhrFields: {
+          withCredentials: true
+        },
+    });
+  }
 }
