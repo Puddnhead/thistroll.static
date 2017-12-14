@@ -78,10 +78,14 @@ window.location="https://www.thistroll.com/unsupportedBrowser.html";
         <input class="registerInput" type="text" id="lastNameInput" placeholder="Last Name"
             maxlength="100" />
         <div class="subscribeWrapper">
-          <p class="subscribeLabel">I would like to receive emails when new blogs appear this site</p>
-          <input class="registerCheckbox" type="checkbox" checked="checked" id="subscribeToUpdates" />
+          <p class="subscribeLabel">
+            <input class="registerCheckbox" type="checkbox" checked="checked" id="subscribeToUpdates" />
+            &nbsp;I would like to receive emails when new blogs appear this site
+          </p>
         </div>
-        <input type="submit" class="registerButton" id="registerButton" value="REGISTER" style="opacity: 0" />
+        <div>
+          <input type="submit" class="registerButton" id="registerButton" value="REGISTER" style="opacity: 0" />
+        </div>
         <p><a class="cancelLink" id="cancelLink" href="#">Cancel</a></p>
       </form>
     </div>
