@@ -1,17 +1,20 @@
-const $ =       require("jquery"),
-  vex =         require("vex-js"),
-  properties =  require("./properties"),
-  notify =      require("./notify"),
-  sessionModel =     require("./sessionModel");
+const $ =         require("jquery"),
+  vex =           require("vex-js"),
+  properties =    require("./properties"),
+  notify =        require("./notify"),
+  sessionModel =  require("./sessionModel");
 
 vex.registerPlugin(require("vex-dialog"))
 vex.defaultOptions.className = "vex-theme-top";
-vex.defaultO
 
 module.exports = {
+  // used to refresh blog comments, avoiding circular dependency
+  _blogCommentsModule: null,
 
-  registerLoginListeners: function () {
+  registerLoginListeners: function (blogCommentsModule) {
     const loginLink = $("#loginLink");
+
+    this._blogCommentsModule = blogCommentsModule;
 
     if (sessionModel.isLoggedIn()) {
       this.setLogoutText();
@@ -56,6 +59,10 @@ module.exports = {
           sessionModel.setSession(session);
           notify.success("Successfully logged in");
           this.setLogoutText();
+          // used to reload blog comments while avoiding circular dependency
+          if (this._blogCommentsModule) {
+            this._blogCommentsModule.reloadBlogComments();
+          }
         }.bind(this),
         error: function () {
           notify.error("Error logging in.");
@@ -82,6 +89,7 @@ module.exports = {
     });
     sessionModel.clearSession();
     this.setLoginText();
+    this._blogCommentsModule.reloadBlogComments();
   },
 
   setLogoutText: function () {

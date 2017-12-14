@@ -2,6 +2,7 @@ const $ =       require("jquery"),
   moment =      require("moment"),
   slick =       require("slick-carousel-browserify"),
   properties =  require("./properties"),
+  blogComments =    require("./blogComments"),
   LuminousGallery =    require("luminous-lightbox").LuminousGallery;
 
 module.exports = {
@@ -24,6 +25,8 @@ module.exports = {
       blogLocationH2.innerHTML = blog.location ? blog.location : "";
       blogDateH2.innerHTML = blog.createdOn ? new moment(blog.createdOn).format("LL") : "";
       blogTextDiv.innerHTML = blog.text;
+
+      blogComments.loadBlogComments(blog.id);
     }.bind(this));
   },
 

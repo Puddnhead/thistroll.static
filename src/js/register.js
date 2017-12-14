@@ -15,10 +15,18 @@ const animationDistance = properties.register.animationDistance,
 
 module.exports = {
 
-  registerForm: function () {
-    $("#headerRegisterBtn").click(function () {
+  _registrationFormVisible: false,
+
+  displayRegistrationForm: function () {
+    if (!this._registrationFormVisible) {
+      window.scroll(0, 0);
+      this._registrationFormVisible = true;
       this._slideSwitchDivs($("#trollDiv"), $("#registerDiv"), this._animateheaderRegisterBtn.bind(this));
-    }.bind(this));
+    }
+  },
+
+  registerForm: function () {
+    $("#headerRegisterBtn").click(this.displayRegistrationForm.bind(this));
 
     $("#registerForm").parsley().on("field:validated", function() {
         let ok = $(".parsley-error").length === 0;
@@ -57,14 +65,17 @@ module.exports = {
         return false;
       }.bind(this));
 
-      $("#cancelLink").click(this._handleCancel.bind(this));
+      $("#cancelLink").click(this.cancelRegistration.bind(this));
   },
 
-  _handleCancel: function () {
-    this._animateregisterButton(false, function () {
-      this._slideSwitchDivs($("#registerDiv"), $("#trollDiv"));
-      this._resetForm();
-    }.bind(this));
+  cancelRegistration: function () {
+    if (this._registrationFormVisible) {
+      this._registrationFormVisible = false;
+      this._animateregisterButton(false, function () {
+        this._slideSwitchDivs($("#registerDiv"), $("#trollDiv"));
+        this._resetForm();
+      }.bind(this));
+    }
   },
 
   _handleUserRegistrationError: function (data) {
@@ -78,7 +89,7 @@ module.exports = {
 
   _handleUserRegistrationSuccess: function (data) {
     const password = $("#passwordInput").val();
-    this._handleCancel();
+    this.cancelRegistration();
 
     login.login(data.username, password);
   },
