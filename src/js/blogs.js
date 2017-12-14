@@ -94,7 +94,7 @@ module.exports = {
           centerMode: true,
           dots: true,
           speed: 500,
-          centerPadding: "10%"
+          centerPadding: "0%"
         });
 
 
