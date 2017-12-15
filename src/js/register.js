@@ -22,6 +22,7 @@ module.exports = {
       $("html, body").animate({
         scrollTop: 0
       }, 500);
+      grecaptcha.reset();
       this._registrationFormVisible = true;
       this._slideSwitchDivs($("#trollDiv"), $("#registerDiv"), this._animateheaderRegisterBtn.bind(this));
     }
@@ -46,22 +47,27 @@ module.exports = {
           settings = {
             method: "POST",
             contentType: "application/json",
-            data: JSON.stringify(registerRequest),
             error: this._handleUserRegistrationError,
             success: this._handleUserRegistrationSuccess.bind(this)
           },
           firstName = $("#firstNameInput").val(),
           lastName = $("lastNameInput").val();
 
-        if (firstName) {
-          registerRequest["firstName"] = firstName;
-        }
-        if (lastName) {
-          registerRequest["lastName"] = lastName;
-        }
+        if (!grecaptcha.getResponse()) {
+          $(".g-recaptcha div div").css("border", "1px solid red");
+        } else {
+          registerRequest["grecaptchaResponse"] = grecaptcha.getResponse();
+          if (firstName) {
+            registerRequest["firstName"] = firstName;
+          }
+          if (lastName) {
+            registerRequest["lastName"] = lastName;
+          }
+          settings["data"] = JSON.stringify(registerRequest);
 
-        $("#registerButton").prop("disabled", true);
-        $.ajax(endpoint, settings);
+          $("#registerButton").prop("disabled", true);
+          $.ajax(endpoint, settings);
+        }
 
         // don't actually submit the form
         return false;

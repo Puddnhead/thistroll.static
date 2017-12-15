@@ -118,4 +118,12 @@ gulp.task('devProperties', function () {
         return contents.toString().replace("https://app.thistroll.com", "http://localhost:8081");
       }))
       .pipe(gulp.dest("./target/js"));
+
+  // Recaptcha Test Site Key
+  gulp.src("./target/index.html", {"base": "./target"})
+      .pipe(vinylMap((contents, filename) => {
+        return contents.toString()
+          .replace("6LehNz0UAAAAAOp_-cYfRbAbjMBJEtLX3Dzgx38O", "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI");
+      }))
+      .pipe(gulp.dest("./target"));
 });
