@@ -22,7 +22,7 @@ module.exports = {
     blogCommentsDiv.append(loadingIndicator);
 
     $.get(endpoint, function (blogComments) {
-      let blogComment, blogCommentHeader, index, timestamp;
+      let blogComment, blogCommentHeader, index, timestamp, deleteLink, deleteFunction;
 
       loadingIndicator.remove();
 
@@ -32,10 +32,15 @@ module.exports = {
         blogComment = $("<div class='blogComment'></div>");
         blogCommentHeader = $("<div class='blogCommentHeader'></div>");
         blogCommentHeader.append($("<div class='blogCommentAuthor'>" + blogComments[index].username + "</div>"));
+        deleteLink = $("<a href='#' class='deleteComment' data-comment-id=" + blogComments[index].id + ">X</a>");
+        blogCommentHeader.append(deleteLink);
         blogCommentHeader.append($("<div class='blogCommentTimestamp'>" + timestamp + "</div>"));
         blogComment.append(blogCommentHeader);
-        blogComment.append($("<div><p class='comment'>" + blogComments[index].comment + "</p></div>"));
 
+        deleteFunction = this._createDeleteBlogCommentFunction(this._currentBlog, blogComments[index].id);
+        deleteLink.click(deleteFunction.bind(this));
+
+        blogComment.append($("<div><p class='comment'>" + blogComments[index].comment + "</p></div>"));
         blogCommentsDiv.append(blogComment);
       }
 
@@ -45,6 +50,31 @@ module.exports = {
         this._createLoginOrRegisterDiv();
       }
     }.bind(this));
+  },
+
+  _createDeleteBlogCommentFunction(blogId, commentId) {
+    const deleteEndpoint = properties.serverHost + "/blog/comment/delete";
+
+    return function () {
+      $.ajax({
+          type: "POST",
+          url: deleteEndpoint,
+          data: JSON.stringify({
+            blogId: blogId,
+            id: commentId
+          }),
+          contentType: "application/json",
+          success: function () {
+            this.reloadBlogComments();
+          }.bind(this),
+          error: function () {
+            notify.error("Error deleting comment");
+          },
+          xhrFields: {
+            withCredentials: true
+          },
+      });
+    }.bind(this);
   },
 
   reloadBlogComments: function () {

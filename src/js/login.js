@@ -8,7 +8,7 @@ vex.registerPlugin(require("vex-dialog"))
 vex.defaultOptions.className = "vex-theme-top";
 
 module.exports = {
-  // used to refresh blog comments, avoiding circular dependency
+  // used to refresh blog comments, avoiding circular dependency. it's hacky.
   _blogCommentsModule: null,
 
   registerLoginListeners: function (blogCommentsModule) {

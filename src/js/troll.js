@@ -1,5 +1,6 @@
-const $ =       require("jquery"),
-  properties =  require("./properties");
+const $ =         require("jquery"),
+  properties =    require("./properties"),
+  sessionModel =  require("./sessionModel");
 
 let clearTextareaNextAction = true,
   currentSpeech;
@@ -24,16 +25,22 @@ module.exports = {
         clearTextareaNextAction = false;
         textBox.val("");
       } else if (event.keyCode === 13) {
+        event.preventDefault();
         command = textBox.val().split(" ")[0];
 
         switch (command) {
           case "exit":
-            event.preventDefault();
             textBox.val("");
             this.registerTrollListeners();
             break;
           case "answermode":
             this.switchToAnswerMode();
+            break;
+          case "deleteMode":
+            textBox.val("");
+            if (sessionModel.isAdmin()) {
+              $(".deleteComment").css("display", "inline");
+            }
             break;
           default:
             submitFunction ? submitFunction() : this.normalSpeechSubmit();

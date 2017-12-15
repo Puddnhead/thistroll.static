@@ -27,5 +27,20 @@ module.exports = {
     }
 
     return "";
+  },
+
+  /* Faux security - the real security is implemented in the back end server */
+  isAdmin: function () {
+    let index;
+
+    if (this.isLoggedIn()) {
+      for (index = 0; index < this._session.userDetails.roles.length; index++) {
+        if (this._session.userDetails.roles[index] === "ADMIN") {
+          return true;
+        }
+      }
+    }
+
+    return false;
   }
 }
