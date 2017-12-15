@@ -22,6 +22,7 @@ module.exports = {
       $("html, body").animate({
         scrollTop: 0
       }, 500);
+      // eslint-disable-next-line no-undef
       grecaptcha.reset();
       this._registrationFormVisible = true;
       this._slideSwitchDivs($("#trollDiv"), $("#registerDiv"), this._animateheaderRegisterBtn.bind(this));
@@ -53,9 +54,11 @@ module.exports = {
           firstName = $("#firstNameInput").val(),
           lastName = $("lastNameInput").val();
 
+        // eslint-disable-next-line no-undef
         if (!grecaptcha.getResponse()) {
           $(".g-recaptcha div div").css("border", "1px solid red");
         } else {
+          // eslint-disable-next-line no-undef
           registerRequest["grecaptchaResponse"] = grecaptcha.getResponse();
           if (firstName) {
             registerRequest["firstName"] = firstName;
