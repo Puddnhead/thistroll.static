@@ -38,12 +38,19 @@ module.exports = {
 
     $.get(endpoint, function (response) {
       const blogListLoadingIndicator = $("#blogListLoadingIndicator");
+
+      let lastBlogItemYCoord;
+
+      if (seeMoreLink) {
+        lastBlogItemYCoord = seeMoreLink.offset().top;
+      }
+
       if (blogListLoadingIndicator) {
         blogListLoadingIndicator.remove();
       }
       blogs = response.blogs;
       for (index = 0, blogCount = blogs.length; index < blogCount; index++) {
-        listItem = $("<li></li>");
+        listItem = $("<li class='blogListItem'></li>");
         listItem.append($("<p class='blogListTitle'><a href='#'>" + blogs[index].title + "</a></p>"));
         if (blogs[index].location) {
           listItem.append($( "<p class='blogListLocation'>" + blogs[index].location + "</p>"));
@@ -56,6 +63,9 @@ module.exports = {
         seeMoreLink.css("display", "inline");
       } else {
         seeMoreLink.css("display", "none");
+      }
+      if (lastBlogItemYCoord) {
+        window.scroll(0, lastBlogItemYCoord);
       }
     }.bind(this));
     this.blogListPage++;
