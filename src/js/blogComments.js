@@ -127,6 +127,10 @@ module.exports = {
     addCommentDiv.append(commentTextbox);
     addCommentDiv.append(submitButton);
 
+    $("html, body").animate({
+      scrollTop: addCommentDiv.offset().top
+    }, 500);
+
     $("#addCommentButton").click(function (e) {
       e.preventDefault();
       $.ajax({
