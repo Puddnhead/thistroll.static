@@ -41,8 +41,8 @@ module.exports = {
 
       let lastBlogItemYCoord;
 
-      if (seeMoreLink) {
-        lastBlogItemYCoord = seeMoreLink.offset().top;
+      if (seeMoreLink.css("display") !== "none") {
+        lastBlogItemYCoord = seeMoreLink.offset().top - 100;
       }
 
       if (blogListLoadingIndicator) {
@@ -65,7 +65,9 @@ module.exports = {
         seeMoreLink.css("display", "none");
       }
       if (lastBlogItemYCoord) {
-        window.scroll(0, lastBlogItemYCoord);
+        $("html, body").animate({
+          scrollTop: lastBlogItemYCoord
+        }, 500);
       }
     }.bind(this));
     this.blogListPage++;
@@ -117,8 +119,10 @@ module.exports = {
   },
 
   registerBlogListListeners: function() {
-    const seeMoreLink = document.getElementById("seeMoreLink");
-    seeMoreLink.addEventListener("click", this.loadNextBlogListPage.bind(this));
+    $("#seeMoreLink").click(function (e) {
+        e.preventDefault();
+        this.loadNextBlogListPage();
+    }.bind(this));
   },
 
   generateLoadBlogFunction: function(blogId) {
