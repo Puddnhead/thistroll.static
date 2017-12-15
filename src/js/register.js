@@ -19,7 +19,9 @@ module.exports = {
 
   displayRegistrationForm: function () {
     if (!this._registrationFormVisible) {
-      window.scroll(0, 0);
+      $("html, body").animate({
+        scrollTop: 0
+      }, 500);
       this._registrationFormVisible = true;
       this._slideSwitchDivs($("#trollDiv"), $("#registerDiv"), this._animateheaderRegisterBtn.bind(this));
     }
