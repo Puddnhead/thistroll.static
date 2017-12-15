@@ -136,11 +136,12 @@ module.exports = {
     headerRegisterBtn.mouseout();
     divRegisterBtn.mouseout();
     if (headerToDiv) {
-      style ="position: absolute; top: " + headerBtnOffset.top + "; left: " + headerBtnOffset.left + ";";
+      style ="position: absolute; top: " + (headerBtnOffset.top - margin) +
+        "; left: " + (headerBtnOffset.left - margin) + ";";
       btnToHide = headerRegisterBtn;
       btnToShow = divRegisterBtn;
-      topChange = "+=" + (divRegisterOffset.top - headerBtnOffset.top - margin);
-      leftChange = "-=" + (headerBtnOffset.left - divRegisterOffset.left + margin);
+      topChange = "+=" + (divRegisterOffset.top - headerBtnOffset.top);
+      leftChange = "-=" + (headerBtnOffset.left - divRegisterOffset.left);
     } else {
       style ="position: absolute; top: " + (divRegisterOffset.top - margin) +
         "; left: " + (divRegisterOffset.left - margin) + ";";
@@ -153,6 +154,7 @@ module.exports = {
       "style=\"" + style + "\"/>");
     $("body").append(animateButton);
     btnToHide.css("opacity", 0);
+
     animateButton.animate({
       "top": topChange,
       "left": leftChange
