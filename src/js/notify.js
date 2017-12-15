@@ -6,7 +6,9 @@ module.exports = {
   success: function (message, duration) {
     let displayTime = duration ? duration : 3000;
 
-    window.scrollTo(0, 0);
+    $("html, body").animate({
+      scrollTop: 0
+    }, 500);
     $("#notificationsBar").text(message)
       .addClass("success")
       .fadeIn(fadeDuration, function () {
@@ -20,7 +22,9 @@ module.exports = {
   },
 
   error: function (message, duration) {
-    window.scrollTo(0, 0);
+    $("html, body").animate({
+      scrollTop: 0
+    }, 500);
     let displayTime = duration ? duration : 3500;
 
     $("#notificationsBar").text(message)
