@@ -144,9 +144,9 @@ module.exports = {
   enlargeTrollDiv: function () {
     if (!this._trollDivEnlarged) {
       $("#blogDiv").css("display", "none");
-      $("#trollDiv").css("width", "58%");
-      $("#trollTextarea").css("height", "800px");
-      $("#trollDiv").css("max-width", "525px");
+      $("#trollDiv").css("width", "70%");
+      $("#trollTextarea").css("height", "1000px");
+      $("#trollDiv").css("max-width", "800px");
 
       this._trollDivEnlarged = true;
     }
