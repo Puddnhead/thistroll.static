@@ -99,7 +99,7 @@ module.exports = {
         }
 
         if (imageCount % 2 === 0) {
-          carousel.append($("<div class='slide'><img class='slideImage' src='resources/images/thistroll.png' /></div>"));
+          carousel.append($("<div class='slide'><img class='slideImage' src='resources/images/thistroll.gif' /></div>"));
         }
 
         slick(carousel, {
