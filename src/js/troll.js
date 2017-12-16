@@ -6,6 +6,7 @@ let clearTextareaNextAction = true,
   currentSpeech;
 
 module.exports = {
+  _trollDivEnlarged: false,
 
   registerTrollListeners: function (submitFunction) {
     const textBox = $("#trollTextarea");
@@ -32,6 +33,7 @@ module.exports = {
           case "exit":
             textBox.val("");
             this.registerTrollListeners();
+            this.revertTrollDiv();
             break;
           case "answermode":
             this.switchToAnswerMode();
@@ -41,6 +43,12 @@ module.exports = {
             if (sessionModel.isAdmin()) {
               $(".deleteComment").css("display", "inline");
             }
+            break;
+          case "enlarge":
+            this.enlargeTrollDiv();
+            textBox.val("Type 'exit' to return to normal view");
+            clearTextareaNextAction = true;
+            textBox.blur();
             break;
           default:
             submitFunction ? submitFunction() : this.normalSpeechSubmit();
@@ -129,5 +137,26 @@ module.exports = {
           withCredentials: true
         },
     });
+  },
+
+  enlargeTrollDiv: function () {
+    if (!this._trollDivEnlarged) {
+      $("#blogDiv").css("display", "none");
+      $("#trollDiv").css("width", "58%");
+      $("#trollTextarea").css("height", "800px");
+      $("#trollDiv").css("max-width", "525px");
+
+      this._trollDivEnlarged = true;
+    }
+  },
+
+  revertTrollDiv: function () {
+    if (this._trollDivEnlarged) {
+      $("#trollDiv").css("width", "18%");
+      $("#trollDiv").css("max-width", "300px");
+      $("#trollTextarea").css("height", "200px");
+      $("#blogDiv").css("display", "inline-block");
+      this._trollDivEnlarged = false;
+    }
   }
 };

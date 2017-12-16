@@ -52,7 +52,7 @@ module.exports = {
             success: this._handleUserRegistrationSuccess.bind(this)
           },
           firstName = $("#firstNameInput").val(),
-          lastName = $("lastNameInput").val();
+          lastName = $("#lastNameInput").val();
 
         // eslint-disable-next-line no-undef
         if (!grecaptcha.getResponse()) {
