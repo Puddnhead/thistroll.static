@@ -51,7 +51,9 @@ module.exports = {
             textBox.blur();
             break;
           default:
-            submitFunction ? submitFunction() : this.normalSpeechSubmit();
+            if (textBox.val()) {
+              submitFunction ? submitFunction() : this.normalSpeechSubmit();
+            }
         }
       }
     }.bind(this));
