@@ -159,7 +159,7 @@ module.exports = {
       topChange = "-=" + (divRegisterOffset.top - headerBtnOffset.top);
       leftChange = "+=" + (headerBtnOffset.left - divRegisterOffset.left);
     }
-    animateButton = $("<input type='button' class='registerButton' value='REGISTER' " +
+    animateButton = $("<input type='button' class='registerButton' value='SUBSCRIBE' " +
       "style=\"" + style + "\"/>");
     $("body").append(animateButton);
     btnToHide.css("opacity", 0);
