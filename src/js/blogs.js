@@ -9,11 +9,13 @@ module.exports = {
   blogListPage: 0,
 
   loadBlog: function (blogId) {
-    const blogTitleH1 = document.getElementById("blogTitle"),
-      blogLocationH2 = document.getElementById("blogLocation"),
-      blogDateH2 = document.getElementById("blogDate"),
-      blogTextDiv = document.getElementById("blogText"),
+    const blogTitleH1 = $("#blogTitle"),
+      blogLocationH2 = $("#blogLocation"),
+      blogDateH2 = $("#blogDate"),
+      blogTextDiv = $("#blogText"),
       endpoint = blogId ? properties.serverHost + "/blog/" + blogId : properties.serverHost + "/blog/current";
+
+      let blogLocation, blogDate;
 
     $.get(endpoint, function (blog) {
       const blogTextLoadingIndicator = $("#blogTextLoadingIndicator");
@@ -21,10 +23,12 @@ module.exports = {
         blogTextLoadingIndicator.remove();
       }
       this.loadBlogImages(blog.id);
-      blogTitleH1.innerHTML = blog.title;
-      blogLocationH2.innerHTML = blog.location ? blog.location : "";
-      blogDateH2.innerHTML = blog.createdOn ? new moment(blog.createdOn).format("LL") : "";
-      blogTextDiv.innerHTML = blog.text;
+      blogTitleH1.text(blog.title);
+      blogLocation = blog.location ? blog.location : "";
+      blogLocationH2.text(blogLocation);
+      blogDate = blog.createdOn ? new moment(blog.createdOn).format("LL") : "";
+      blogDateH2.text(blogDate);
+      blogTextDiv.html(blog.text);
 
       blogComments.loadBlogComments(blog.id);
     }.bind(this));
